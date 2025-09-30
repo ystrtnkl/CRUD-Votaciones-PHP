@@ -1,5 +1,6 @@
 # CRUD-Votaciones
 Un CRUD básico para registrar usuarios que podrán crear y participar en encuestas sencillas.
+Se puede iniciar con: sh .docker/auto.sh
 
 ## License
 This project is licensed under the GNU General Public License v3.0.  

@@ -1,0 +1,16 @@
+{
+    "name": "ystrtnkl/crud-votaciones",
+    "description": "CRUD basico para registrar usuarios que pueden crear y completar encuestas sencillas",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ystrtnkl\\CrudVotaciones\\": "./"
+        }
+    },
+    "require": {
+        "ramsey/uuid": "^4.9",
+        "phroute/phroute": "^2.2",
+        "nesbot/carbon": "^3.10"
+    }
+}

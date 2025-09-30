@@ -1,0 +1,6 @@
+#.docker/.env
+.docker/mariadb/*
+no/
+varwwwhtml/proyecto/vendor
+varwwwhtml/proyecto/composer.lock
+varwwwhtml/proyecto/secretEnv.php

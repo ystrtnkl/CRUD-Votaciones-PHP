@@ -4,3 +4,6 @@
 main {
     margin: 20px;
 }
+.oculto {
+    display: none;
+}

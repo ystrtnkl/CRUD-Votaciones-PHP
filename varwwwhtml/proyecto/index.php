@@ -8,6 +8,7 @@
     $router = new RouteCollector(); #Crear el enrutador
 
 
+    $esHtml = true; #Si pone el principio y el final de un archivo .html correcto
     #Creando rutas, que tienen que devolver un texto (el contenido a mostrar)
     $router->get('/', function(){
         return "<script>window.location.pathname = 'inicio'</script>";
@@ -41,7 +42,7 @@
         #return 'has llegado a ejemplo2 con get';
     });
     
-    include_once(DIR_PUBLIC . "html/head.html");  
+    if ($esHtml) include_once(DIR_PUBLIC . "html/head.html");  
     try{
         $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
         $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
@@ -50,7 +51,7 @@
     } catch (HttpRouteNotFoundException $e)  {
         include_once(DIR_VIEWS . "error404.php");
     }
-    include_once(DIR_PUBLIC . "html/end.html");
+    if ($esHtml) include_once(DIR_PUBLIC . "html/end.html");
 
 ?>
 

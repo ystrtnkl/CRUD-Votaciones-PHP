@@ -1,19 +1,25 @@
-<title>registrarse</title>
+<title>Registrarse</title>
 </head>
 <body>
 <?php require(DIR_VIEWS . "template/cabecera.php") ?>
+<?php require(DIR_CONTROLLERS . "generarContrasegna.php") ?>
 <main>
-    <h2>registrarse</h2>
+    <h2>Registrarse</h2>
 
     <form action="<?=DIR_CONTROLLERS?>registrar.php" method="POST">
-        Nombre: <input type="text" name="nombre"><br>
-        Correo: <input type="email" name="correo"><br>
-        Contraseña: <input type="password" name="contrasegna"><br>
-        Repetir contraseña: <input type="password" name="contrasegna2"><br>
-        <input type="submit" value="Iniciar sesión">
+        Nombre: <input type="text" name="nombre" id="nombre"><br>
+        Correo: <input type="email" name="correo" id="correo"><br>
+        Contrasegna: <input type="password" name="contrasegna" id="contrasegna"><br>
+        Repetir contraseña: <input type="password" name="contrasegna2" id="contrasegna2"><br>
+        <input type="submit" value="Iniciar sesión" id="submit">
     </form>
-    <button id="generar">Generar contraseña automática</button> 
-    <p id="posibleContrasegna" class="oculto"><?=require(DIR_CONTROLLERS . "generarContrasegna.php")?></p>
+
+    <button id="generar">Generar contrasegna automatica</button> <br>
+    <div id="posibleContrasegna" class="oculto">
+        <div id="contrasegnaGenerada"><?=generarContrasegna()?></div>
+        <p>(Actualiza para generar una nueva) <button id="usarContrasegna">Usar esta contrasegna</button></p>
+    </div>
+
     <a href="/iniciarSesion">Ya tengo cuenta</a>
     <script src="<?=DIR_PUBLIC?>js/llamarGenerarContrasegna.js"></script>
 </main>

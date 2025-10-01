@@ -1,9 +1,9 @@
-<title>informacion</title>
+<title>Informacion</title>
 </head>
 <body>
 <?php require(DIR_VIEWS . "template/cabecera.php") ?>
 <main>
-    <h2>informacion</h2>
+    <h2>Informacion</h2>
 
 
 

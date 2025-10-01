@@ -14,7 +14,10 @@ CREATE TABLE ENCUESTA (
     nombre VARCHAR(127),
     contenido VARCHAR(1023),
     uuid_USUARIO CHAR(36),
-    CONSTRAINT fk_ENCUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid)
+    uuidsPermisos VARCHAR(1023),
+    tipoPermisos CHAR(1), 
+    CONSTRAINT fk_ENCUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid),
+    CONSTRAINT chk_tipoPermisos CHECK (tipoPermisos IN ('b','n','w'))
 );
 
 CREATE TABLE RESPUESTA (

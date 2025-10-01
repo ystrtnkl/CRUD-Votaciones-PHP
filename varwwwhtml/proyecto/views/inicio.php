@@ -3,7 +3,7 @@
 <body>
 <?php require(DIR_VIEWS . "template/cabecera.php") ?>
 <main>
-    <h2>pagina de inicio</h2>
+    <h2>Pagina de inicio</h2>
 
 
 

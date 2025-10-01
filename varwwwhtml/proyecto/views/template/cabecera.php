@@ -23,6 +23,9 @@
             <li class="nav-item">
                 <a href="/informacion" class="nav-link" id="cabecera-informacion">Informacion</a>
             </li>
+            <li class="nav-item">
+                <a href="/pedirContrasegna" class="nav-link" id="cabecera-pedirContrasegna">Pedir contrasegna nueva</a>
+            </li>
         </ul> 
     </header> 
 </div>

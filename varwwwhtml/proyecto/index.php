@@ -34,6 +34,9 @@
     $router->get('/iniciarSesion', function(){
         include_once(DIR_VIEWS . "iniciarSesion.php");
     });
+    $router->get('/pedirContrasegna', function(){
+        include_once(DIR_VIEWS . "pedirContrasegna.php");
+    });
     $router->any('/ejemplo', function(){
         echo 'has llegado a ejemplo (no carga cosas html bien)';
     });

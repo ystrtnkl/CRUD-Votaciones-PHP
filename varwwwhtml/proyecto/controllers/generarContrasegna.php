@@ -1,10 +1,11 @@
 <?php
 #Longitud concreta, se asegura de tener minúsculas, números, símbolos y mayúsculas
-function generarContrasegna($longitud = 12) {
-    $charsGeneral = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
-    if ($longitud < 4 || !is_numeric($longitud) || $longitud > 72) {
+function generarContrasegna($longitud = 12, $esPin = false) {
+    if ($longitud < 4 || !is_numeric($longitud) || $longitud > 70) {
         $longitud = 12;
     }
+    if ($esPin) return substr(str_shuffle('0123456789012345678901234567890123456789012345678901234567890123456789'), 0, $longitud);
+    $charsGeneral = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
     $charsNumeros = '0123456789';
     $charsSimbolos = '!@#$%^&*()';
     $charsMinusculas = 'abcdefghijklmnopqrstuvwxyz';

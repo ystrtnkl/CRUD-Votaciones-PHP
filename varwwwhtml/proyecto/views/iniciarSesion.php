@@ -5,7 +5,7 @@
 <main>
     <h2>Iniciar sesion</h2>
 
-    <form action="<?=DIR_CONTROLLERS?>login.php" method="POST">
+    <form action="<?=DIR_API?>login.php" method="POST">
         Correo: <input type="email" name="correo"><br>
         Contrasegna: <input type="password" name="contrasegna"><br>
         <input type="submit" value="Iniciar sesión">

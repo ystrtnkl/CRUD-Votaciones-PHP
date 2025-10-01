@@ -60,6 +60,7 @@
     $router->get('/api/nuevaContrasegna', function(){
         #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html
         $tamagno = isset($_GET['tamagno']) ? (int)$_GET['tamagno'] : 12;
+        $esPin = isset($_GET['esPin']) ?? false;
         include_once(DIR_API . "devolverContrasegnaTamagno.php");
     });
     $router->any('/ejemplo', function(){

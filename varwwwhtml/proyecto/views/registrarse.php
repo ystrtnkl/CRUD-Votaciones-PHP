@@ -6,7 +6,7 @@
 <main>
     <h2>Registrarse</h2>
 
-    <form action="<?=DIR_CONTROLLERS?>registrar.php" method="POST">
+    <form action="<?=DIR_API?>registrar.php" method="POST">
         Nombre: <input type="text" name="nombre" id="nombre"><br>
         Correo: <input type="email" name="correo" id="correo"><br>
         Contrasegna: <input type="password" name="contrasegna" id="contrasegna"><br>

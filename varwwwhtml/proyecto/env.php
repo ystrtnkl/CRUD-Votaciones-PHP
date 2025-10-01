@@ -8,7 +8,7 @@
     const DIR_SQL = "sql/";
     const DIR_MEDIA = "media/";
     const DIR_PUBLIC = "public/";
-
+    const DIR_API = "api/";
     
 
 

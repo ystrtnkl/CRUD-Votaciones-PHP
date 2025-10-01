@@ -16,7 +16,7 @@
 
     <button id="generar">Generar contrasegna automatica</button> <br>
     <div id="posibleContrasegna" class="oculto">
-        <div id="contrasegnaGenerada"><?=generarContrasegna()?></div>
+        <div id="contrasegnaGenerada"></div>
         <p>(Actualiza para generar una nueva) <button id="usarContrasegna">Usar esta contrasegna</button></p>
     </div>
 

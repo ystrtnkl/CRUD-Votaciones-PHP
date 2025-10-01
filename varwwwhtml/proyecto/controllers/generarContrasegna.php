@@ -1,6 +1,6 @@
 <?php
 #Longitud concreta, se asegura de tener minúsculas, números, símbolos y mayúsculas
-function generarContrasegna($longitud = 12, $esPin = false) {
+function generarContrasegna(int $longitud = 12, bool $esPin = false): string {
     if ($longitud < 4 || !is_numeric($longitud) || $longitud > 70) {
         $longitud = 12;
     }

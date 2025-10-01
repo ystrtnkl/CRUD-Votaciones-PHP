@@ -24,7 +24,10 @@
                 <a href="/informacion" class="nav-link" id="cabecera-informacion">Informacion</a>
             </li>
             <li class="nav-item">
-                <a href="/pedirContrasegna" class="nav-link" id="cabecera-pedirContrasegna">Pedir contrasegna nueva</a>
+                <a href="/pedirContrasegna" class="nav-link" id="cabecera-pedirContrasegna">Generador</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin" class="nav-link" id="cabecera-admin">Administracion</a>
             </li>
         </ul> 
     </header> 

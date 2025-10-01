@@ -54,6 +54,12 @@
         include_once(DIR_PUBLIC . "html/end.html");
     });
 
+    $router->get('/admin', function(){
+        include_once(DIR_PUBLIC . "html/head.html");  
+        include_once(DIR_VIEWS . "admin.php");
+        include_once(DIR_PUBLIC . "html/end.html");
+    });
+
     $router->get('/api/prueba', function(){
         include_once(DIR_API . "pruebaApi.php");
     });

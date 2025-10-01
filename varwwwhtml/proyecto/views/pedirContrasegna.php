@@ -9,7 +9,7 @@
     <p>Aqui tienes una contrasegna nueva de ejemplo de 12 caracteres</p>
     Cantidad de caracteres: <input type="number" id="tamagnoContrasegna" name="tamagno" min="4" max="7o" value="12"><br>
     Es solo numerica <input id="esPin" type="checkbox"><br>
-    <button id="generar">Generar</button><br>
+    <button class="btn btn-primary" type="button" id="generar">Generar</button><br><br>
     <p id="contrasegnaGenerada"></p>
     <script src="<?=DIR_PUBLIC?>js/llamarGenerarContrasegna.js"></script>
 </main>

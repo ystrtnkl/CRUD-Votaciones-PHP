@@ -6,7 +6,10 @@ CREATE TABLE USUARIO (
     uuid CHAR(36) PRIMARY KEY,
     nombre VARCHAR(63) NOT NULL,
     contrasegna VARCHAR(128) NOT NULL,
-    fechaCreado TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fechaCreado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    esAdmin CHAR(1),
+    CONSTRAINT chk_esAdmin CHECK (esAdmin IN ('s','n'))
+
 );
 
 CREATE TABLE ENCUESTA (

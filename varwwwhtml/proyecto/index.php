@@ -87,11 +87,13 @@
 
     } catch (HttpRouteNotFoundException $e)  {
         include_once(DIR_PUBLIC . "html/head.html"); 
-        include_once(DIR_VIEWS . "v_error404.php");
+        $error = 404;
+        include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     } catch (HttpMethodNotAllowedException $e) {
         include_once(DIR_PUBLIC . "html/head.html"); 
-        include_once(DIR_VIEWS . "v_error404.php");
+        $error = 405;
+        include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     }
 

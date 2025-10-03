@@ -1,8 +1,8 @@
 <title>Registrarse</title>
 </head>
 <body>
-<?php require(DIR_VIEWS . "template/cabecera.php") ?>
-<?php require(DIR_CONTROLLERS . "generarContrasegna.php") ?>
+<?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
+<?php require(DIR_CONTROLLERS . "c_generarContrasegna.php") ?>
 <main>
     <h2>Registrarse</h2>
 
@@ -27,4 +27,4 @@
     <a href="/iniciarSesion">Ya tengo cuenta</a>
     <script src="<?=DIR_PUBLIC?>js/llamarGenerarContrasegna.js"></script>
 </main>
-<?php include(DIR_VIEWS . "template/footer.php") ?>
+<?php include(DIR_VIEWS . "template/vt_footer.php") ?>

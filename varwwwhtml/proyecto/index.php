@@ -15,66 +15,66 @@
     });
     $router->get('/inicio', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "inicio.php");
+        include_once(DIR_VIEWS . "v_inicio.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/registrarse', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "registrarse.php");
+        include_once(DIR_VIEWS . "v_registrarse.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/informacion', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "informacion.php");
+        include_once(DIR_VIEWS . "v_informacion.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/crearEncuesta', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "crearEncuesta.php");
+        include_once(DIR_VIEWS . "v_crearEncuesta.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/verEncuesta', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "verEncuesta.php");
+        include_once(DIR_VIEWS . "v_verEncuesta.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/verUsuario', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "verUsuario.php");
+        include_once(DIR_VIEWS . "v_verUsuario.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/iniciarSesion', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "iniciarSesion.php");
+        include_once(DIR_VIEWS . "v_iniciarSesion.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/pedirContrasegna', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "pedirContrasegna.php");
+        include_once(DIR_VIEWS . "v_pedirContrasegna.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
 
     $router->get('/admin', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "admin.php");
+        include_once(DIR_VIEWS . "v_admin.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
 
     $router->get('/api/prueba', function(){
-        include_once(DIR_API . "pruebaApi.php");
+        include_once(DIR_API . "ca_pruebaApi.php");
     });
     $router->get('/api/nuevaContrasegna', function(){
         #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html
         $tamagno = isset($_GET['tamagno']) ? (int)$_GET['tamagno'] : 12;
         $esPin = isset($_GET['esPin']) ?? false;
-        include_once(DIR_API . "devolverContrasegnaTamagno.php");
+        include_once(DIR_API . "ca_devolverContrasegnaTamagno.php");
     });
     $router->any('/ejemplo', function(){
         echo 'has llegado a ejemplo (no carga cosas html bien)';
     });
     $router->get('/ejemplo2', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "prueba.php"); #Redirigiendo a otro archivo
+        include_once(DIR_VIEWS . "v_prueba.php"); #Redirigiendo a otro archivo
         #return 'has llegado a ejemplo2 con get';
         include_once(DIR_PUBLIC . "html/end.html");
     });
@@ -85,7 +85,7 @@
         echo $response; #Mostrar en el navegador lo conseguido en la ruta
 
     } catch (HttpRouteNotFoundException $e)  {
-        include_once(DIR_VIEWS . "error404.php");
+        include_once(DIR_VIEWS . "v_error404.php");
     }
     
 

@@ -1,7 +1,7 @@
 <title>Iniciar sesion</title>
 </head>
 <body>
-<?php require(DIR_VIEWS . "template/cabecera.php") ?>
+<?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <main>
     <h2>Iniciar sesion</h2>
 
@@ -15,4 +15,4 @@
     <a href="/registrarse">No tengo cuenta</a>
     
 </main>
-<?php include(DIR_VIEWS . "template/footer.php") ?>
+<?php include(DIR_VIEWS . "template/vt_footer.php") ?>

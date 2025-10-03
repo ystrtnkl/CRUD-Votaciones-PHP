@@ -4,4 +4,5 @@ $esPin = isset($_GET['esPin']) ?? false;
 header("Content-Type: text/plain");
 require_once(DIR_CONTROLLERS . "c_generarContrasegna.php");
 #$tamagno = $_GET['tamagno'] ?? 12;
-echo generarContrasegna($tamagno, $esPin);
+#echo generarContrasegna($tamagno, $esPin);
+echo htmlspecialchars(generarContrasegna($tamagno, $esPin), ENT_QUOTES, 'UTF-8');

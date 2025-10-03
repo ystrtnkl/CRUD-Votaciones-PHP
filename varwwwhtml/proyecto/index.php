@@ -3,10 +3,10 @@
     
     include_once "vendor/autoload.php"; #Obligatorio para composer
     use Phroute\Phroute\RouteCollector; #Incluir libreria de rutas (despues de configurar apache para que rediriga siempre a index.php)
-    use Phroute\Phroute\Exception\HttpRouteNotFoundException;;
+    use Phroute\Phroute\Exception\HttpRouteNotFoundException;
+    use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
 
     $router = new RouteCollector(); #Crear el enrutador
-
 
     #Creando rutas, que tienen que devolver un texto (el contenido a mostrar)
     $router->get('/', function(){
@@ -64,10 +64,11 @@
         include_once(DIR_API . "ca_pruebaApi.php");
     });
     $router->get('/api/nuevaContrasegna', function(){
-        #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html
-        $tamagno = isset($_GET['tamagno']) ? (int)$_GET['tamagno'] : 12;
-        $esPin = isset($_GET['esPin']) ?? false;
+        #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html (en el propio archivo)
         include_once(DIR_API . "ca_devolverContrasegnaTamagno.php");
+    });
+    $router->post('/api/nuevoUsuario', function(){
+        include_once(DIR_API . "ca_registrarUsuario.php");
     });
     $router->any('/ejemplo', function(){
         echo 'has llegado a ejemplo (no carga cosas html bien)';
@@ -85,9 +86,14 @@
         echo $response; #Mostrar en el navegador lo conseguido en la ruta
 
     } catch (HttpRouteNotFoundException $e)  {
+        include_once(DIR_PUBLIC . "html/head.html"); 
         include_once(DIR_VIEWS . "v_error404.php");
+        include_once(DIR_PUBLIC . "html/end.html");
+    } catch (HttpMethodNotAllowedException $e) {
+        include_once(DIR_PUBLIC . "html/head.html"); 
+        include_once(DIR_VIEWS . "v_error404.php");
+        include_once(DIR_PUBLIC . "html/end.html");
     }
-    
 
 ?>
 

@@ -1,5 +1,6 @@
 <?php
-
+$tamagno = isset($_GET['tamagno']) ? (int)$_GET['tamagno'] : 12;
+$esPin = isset($_GET['esPin']) ?? false;
 header("Content-Type: text/plain");
 require_once DIR_CONTROLLERS . "c_generarContrasegna.php";
 #$tamagno = $_GET['tamagno'] ?? 12;

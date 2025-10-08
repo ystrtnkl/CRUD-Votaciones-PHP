@@ -46,6 +46,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 WORKDIR /var/www/html
 
+#RUN useradd ciclost && usermod -aG sudo ciclost
+#RUN useradd ${whoami} && usermod -aG sudo ${whoami}
+
 #RUN npm install -D tailwindcss
 ## COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
 ## RUN install-php-extensions gd bcmath zip intl opcache

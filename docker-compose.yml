@@ -25,6 +25,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     #user: "1002:1002" # IMPORTANTE: UID:GID     (id -u ; id -g)
+    #user: ${whoami}:${whoami} #ciclost:ciclost
     command: >
       bash -c "chmod -R 0777 /var/www/html && apache2-foreground"
 

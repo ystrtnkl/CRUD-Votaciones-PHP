@@ -13,14 +13,15 @@ main {
     font-style: italic;
 }
 footer {
-    position: fixed;
+    /*position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 100%;*/
     background-color: rgb(32, 32, 32);
     color: rgb(224, 224, 224);
     padding: 5px;
     text-align: center;
+    margin-top: auto;
 }
 button, input {
     margin-bottom: 5px;

@@ -20,7 +20,8 @@ CREATE TABLE ENCUESTA (
     uuidsPermisos VARCHAR(1023),
     tipoPermisos CHAR(1), 
     CONSTRAINT fk_ENCUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid),
-    CONSTRAINT chk_tipoPermisos CHECK (tipoPermisos IN ('b','n','w'))
+    CONSTRAINT chk_tipoPermisos CHECK (tipoPermisos IN ('b','n','w')),
+    foto VARCHAR(127)
 );
 
 CREATE TABLE RESPUESTA (

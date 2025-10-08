@@ -9,7 +9,7 @@
     const DIR_MEDIA = "media/";
     const DIR_PUBLIC = "public/";
     const DIR_API = "api/";
-    
+    const DIR_FILES = "files/";
 
 
 

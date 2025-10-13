@@ -52,6 +52,11 @@
         include_once(DIR_PUBLIC . "html/end.html");
     });
 
+    $router->get('/extra', function(){
+        include_once(DIR_PUBLIC . "html/head.html");  
+        include_once(DIR_VIEWS . "v_pruebasExtra.php");
+        include_once(DIR_PUBLIC . "html/end.html");
+    });
     $router->get('/admin', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
         include_once(DIR_VIEWS . "v_admin.php");
@@ -67,6 +72,9 @@
     });
     $router->post('/api/nuevoUsuario', function(){
         include_once(DIR_API . "ca_registrarUsuario.php");
+    });
+    $router->post('/api/guardarFotoPerfil', function(){
+        include_once(DIR_API . "ca_guardarFoto.php");
     });
     $router->any('/ejemplo', function(){
         echo 'has llegado a ejemplo (no carga cosas html bien)';

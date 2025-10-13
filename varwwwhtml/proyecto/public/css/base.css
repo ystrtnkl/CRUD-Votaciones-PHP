@@ -12,6 +12,14 @@ main {
 #contrasegnaGenerada {
     font-style: italic;
 }
+body {
+  /* Fallback for browsers that don't support dvh */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 footer {
     /*position: fixed;
     left: 0;
@@ -21,7 +29,7 @@ footer {
     color: rgb(224, 224, 224);
     padding: 5px;
     text-align: center;
-    margin-top: auto;
+  margin-top: auto;
 }
 button, input {
     margin-bottom: 5px;

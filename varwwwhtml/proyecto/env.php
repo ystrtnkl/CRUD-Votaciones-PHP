@@ -9,9 +9,10 @@
     const DIR_MEDIA = "media/";
     const DIR_PUBLIC = "public/";
     const DIR_API = "api/";
-    const DIR_FILES = "files/";
-
-
+    const DIR_FILES = "public/files/";
+    const DIR_FILES_PRIV = "files/";
+    const DIR_FOTOS_PERFIL = "public/files/fotosPerfil/";
+    const DIR_PORTADAS_ENCUESTAS = "public/files/portadasEncuestas/";
 
 
 

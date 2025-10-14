@@ -5,12 +5,14 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "ystrtnkl\\CrudVotaciones\\": "./"
+            "ystrtnkl\\CrudVotaciones\\": "./",
+            "Models\\": "models/"
         }
     },
     "require": {
         "ramsey/uuid": "^4.9",
         "phroute/phroute": "^2.2",
-        "nesbot/carbon": "^3.10"
+        "nesbot/carbon": "^3.10",
+        "respect/validation": "^2.4"
     }
 }

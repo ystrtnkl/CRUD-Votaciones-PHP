@@ -15,7 +15,7 @@
         private $foto;
         private $fechaCreado;
 
-        public function __construct($nombre, $contenido = "Nada", $usuario, $permisos = [], $tipoPermisos = 'b', $foto = "") {
+        public function __construct($nombre, $contenido = "Nada", $usuario, $permisos = [], $tipoPermisos = 'n', $foto = "") {
             try {
                 Validator::in(['b','n','w'])->check($tipoPermisos);
                 Validator::arrayType()->each(Validator::stringType()->length(36,36))->check($permisos);
@@ -67,6 +67,10 @@
         }
         public function getFechaCreado() {
             return $this->fechaCreado;
+        }
+        public function __toString()
+        {
+            return $this->id;
         }
 
         public function setPermisos($permisos) {

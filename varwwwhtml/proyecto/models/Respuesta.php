@@ -33,10 +33,10 @@
 
                 $idCreado = Uuid::uuid4();
                 $this->id = $idCreado->toString();
-                $this->contenido = $contenido;
                 $this->usuario = $usuario;
                 $this->encuesta = $encuesta;
                 $this->fechaCreado = time();
+                $this->contenido = $contenido;
             } catch (ValidationException $e) {
                 echo "Error en los datos: " . $e;
             } catch (Exception $e) {
@@ -58,6 +58,10 @@
         }
         public function getFechaCreado() {
             return $this->fechaCreado;
+        }
+        public function __toString()
+        {
+            return $this->id;
         }
     }
 ?>

@@ -1,4 +1,3 @@
-
 <title>Inicio de CRUD de votaciones</title>
 </head>
 <body>
@@ -7,7 +6,7 @@
     <h2>Pagina de inicio</h2>
 
 
-
+    
     
 </main>
 <?php include(DIR_VIEWS . "template/vt_footer.php") ?>

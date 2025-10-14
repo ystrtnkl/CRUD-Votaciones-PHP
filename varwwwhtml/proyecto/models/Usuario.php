@@ -3,6 +3,7 @@
     use Ramsey\Uuid\Uuid;
     use Respect\Validation\Validator;
     use Respect\Validation\Exceptions\ValidationException;
+    include_once("../controllers/c_generarContrasegna.php");
     class Usuario {
         private $uuid;
         private $nombre;
@@ -11,7 +12,7 @@
         private $fechaCreado;
         private $esAdmin;
 
-        public function __construct($nombre, $correo, $contrasegna) {
+        public function __construct($nombre, $correo, $contrasegna = generarContrasegna()) {
             try {
                 Validator::stringType()->notEmpty()->length(3, 63)->check($nombre);
                 Validator::email()->check($correo);
@@ -45,6 +46,10 @@
         }
         public function getEsAdmin() {
             return $this->esAdmin;
+        }
+        public function __toString()
+        {
+            return $this->uuid;
         }
 
         public function setNombre($nombre) {

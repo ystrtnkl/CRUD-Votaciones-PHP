@@ -51,6 +51,11 @@
         include_once(DIR_VIEWS . "v_pedirContrasegna.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
+    $router->get('/exito', function(){
+        include_once(DIR_PUBLIC . "html/head.html");  
+        include_once(DIR_VIEWS . "v_exito.php");
+        include_once(DIR_PUBLIC . "html/end.html");
+    });
 
     $router->get('/extra', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
@@ -65,6 +70,9 @@
 
     $router->get('/api/prueba', function(){
         include_once(DIR_API . "ca_pruebaApi.php");
+    });
+    $router->get('/api/prueba/{id}', function($id){
+        echo $id;
     });
     $router->get('/api/nuevaContrasegna', function(){
         #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html (en el propio archivo)

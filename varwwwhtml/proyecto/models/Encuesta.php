@@ -15,8 +15,13 @@
         private $foto;
         private $fechaCreado;
 
-        public function __construct($nombre, $contenido = "Nada", $usuario, $permisos = [], $tipoPermisos = 'n', $foto = "") {
+        public function __construct($nombre, $usuario, $id = "", $contenido = "Nada", $permisos = [], $tipoPermisos = 'n', $foto = "", $fechaCreado = "") {
             try {
+                try {
+                    Validator::uuid()->check($id);
+                } catch (ValidationException $e) {
+                    $id = Uuid::uuid4()->toString();
+                }
                 Validator::in(['b','n','w'])->check($tipoPermisos);
                 Validator::arrayType()->each(Validator::stringType()->length(36,36))->check($permisos);
                 Validator::stringType()->length(null,127)->check($foto);
@@ -24,19 +29,24 @@
                 Validator::stringType()->notEmpty()->length(1,4095)->check($contenido);
                 Validator::instance(Usuario::class)->check($usuario);
                 Validator::stringType()->length(36,36)->check($usuario->getUuid());
+                try {
+                    Validator::stringType()->notEmpty()->check($fechaCreado);
+                } catch (ValidationException $e) {
+                    $fechaCreado = time();
+                }
                 if (in_array($usuario->getUuid(), $permisos) && $tipoPermisos !== 'n') {
                     throw new Exception("El creador no tiene relevancia en los permisos de su encuesta.");
 
                 }
-                $uuidCreado = Uuid::uuid4();
-                $this->id = $uuidCreado->toString();
+                
+                $this->id = $id;
                 $this->nombre = $nombre;
                 $this->contenido = $contenido;
                 $this->usuario = $usuario;
                 $this->permisos = $permisos;
                 $this->tipoPermisos = $tipoPermisos;
                 $this->foto = $foto;
-                $this->fechaCreado = time();
+                $this->fechaCreado = $fechaCreado;
             } catch (ValidationException $e) {
                 echo "Error en los datos: " . $e;
             } catch (Exception $e) {
@@ -77,16 +87,20 @@
             try{
                 Validator::arrayType()->each(Validator::stringType()->length(36,36))->check($permisos);
                 $this->permisos = $permisos;
+                return $this;
             } catch (ValidationException $e) {
                 echo "Error en los datos: " . $e;
+                return null;
             }
         }
         public function setTipoPermisos($tipoPermisos) {
             try{
                 Validator::in(['b','n','w'])->check($tipoPermisos);
                 $this->tipoPermisos = $tipoPermisos;
+                return $this;
             } catch (ValidationException $e) {
                 echo "Error en los datos: " . $e;
+                return null;
             }
         }
     }

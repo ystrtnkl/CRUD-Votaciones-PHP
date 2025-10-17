@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "ystrtnkl\\CrudVotaciones\\": "./",
-            "Models\\": "models/"
+            "Models\\": "models/",
+            "Controllers\\": "controllers/"
         }
     },
     "require": {

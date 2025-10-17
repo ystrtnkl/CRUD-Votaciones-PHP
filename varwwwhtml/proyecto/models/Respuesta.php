@@ -13,13 +13,23 @@
         private $encuesta;
         private $fechaCreado;
 
-        public function __construct($usuario, $encuesta, $contenido = "Nada") {
+        public function __construct($usuario, $encuesta, $id = "", $contenido = "Nada", $fechaCreado = "") {
             try {
+                try {
+                    Validator::uuid()->check($id);
+                } catch (ValidationException $e) {
+                    $id = Uuid::uuid4()->toString();
+                }
                 Validator::stringType()->notEmpty()->length(1,1023)->check($contenido);
                 Validator::instance(Encuesta::class)->check($encuesta);
                 Validator::instance(Usuario::class)->check($usuario);
                 Validator::stringType()->length(36,36)->check($usuario->getUuid());
                 Validator::stringType()->length(36,36)->check($encuesta->getId());
+                try {
+                    Validator::stringType()->notEmpty()->check($fechaCreado);
+                } catch (ValidationException $e) {
+                    $fechaCreado = time();
+                }
                 if ($usuario->getUuid() === $encuesta->getUsuario()->getUuid()) {
                     throw new Exception("El usuario no puede responder a su propia encuesta.");
                 }
@@ -28,11 +38,10 @@
                 } else if ($encuesta->getTipoPermisos() === 'w' && !in_array($usuario->getUuid(), $encuesta->getPermisos())) {
                     throw new Exception("El usuario no esta permitido en esta encuesta.");
                 }
-                //Si ya ha respondido
                 
 
-                $idCreado = Uuid::uuid4();
-                $this->id = $idCreado->toString();
+
+                $this->id = $id;
                 $this->usuario = $usuario;
                 $this->encuesta = $encuesta;
                 $this->fechaCreado = time();

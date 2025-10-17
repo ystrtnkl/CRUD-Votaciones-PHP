@@ -67,6 +67,38 @@
         include_once(DIR_VIEWS . "v_admin.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
+    
+
+    $router->post('/api/crearUsuario', function(){
+        include_once(DIR_API . "ca_crearUsuario.php");
+    });
+    $router->post('/api/borrarUsuario', function(){
+        include_once(DIR_API . "ca_borrarUsuario.php");
+    });
+    $router->post('/api/leerUsuario', function(){
+        include_once(DIR_API . "ca_leerUsuario.php");
+    });
+    $router->post('/api/modificarUsuario', function(){
+        include_once(DIR_API . "ca_modificarUsuario.php");
+    });
+    $router->post('/api/crearEncuesta', function(){
+        include_once(DIR_API . "ca_crearEncuesta.php");
+    });
+    $router->post('/api/borrarEncuesta', function(){
+        include_once(DIR_API . "ca_borrarEncuesta.php");
+    });
+    $router->post('/api/leerEncuesta', function(){
+        include_once(DIR_API . "ca_leerEncuesta.php");
+    });
+    $router->post('/api/modificarEncuesta', function(){
+        include_once(DIR_API . "ca_modificarEncuesta.php");
+    });
+    $router->post('/api/crearRespuesta', function(){
+        include_once(DIR_API . "ca_crearRespuesta.php");
+    });
+    $router->post('/api/leerRespuesta', function(){
+        include_once(DIR_API . "ca_leerRespuesta.php");
+    });
 
     $router->get('/api/prueba', function(){
         include_once(DIR_API . "ca_pruebaApi.php");
@@ -78,9 +110,7 @@
         #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html (en el propio archivo)
         include_once(DIR_API . "ca_devolverContrasegnaTamagno.php");
     });
-    $router->post('/api/nuevoUsuario', function(){
-        include_once(DIR_API . "ca_registrarUsuario.php");
-    });
+
     $router->post('/api/guardarFotoPerfil', function(){
         include_once(DIR_API . "ca_guardarFoto.php");
     });

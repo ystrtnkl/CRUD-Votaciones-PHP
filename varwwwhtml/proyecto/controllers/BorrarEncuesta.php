@@ -4,16 +4,17 @@
     use Models\Encuesta;
     use Models\Usuario;
     use Models\Respuesta;
-    use Controllers\Interfaces\Modificar;
-    class ModificarEncuesta implements Modificar {
+    use Controllers\Interfaces\Borrar;
+    class BorrarEncuesta implements Borrar {
         public function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public function modificar($id, $encuestaNueva): bool {
-            //modifica datos basicos de la encuesta
+        public function borrar($uuid): bool {
+            //borrar la encuesta y sus respuestas asociadas
             return true;
         }
+    
 
     }

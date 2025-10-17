@@ -5,7 +5,7 @@
 <main>
     <h2>Iniciar sesion</h2>
 
-    <form action="<?=DIR_API?>login.php" method="POST">
+    <form action="api/login.php" method="POST">
         <p>Correo: </p>
         <input type="email" name="correo"><br>
         <p>Contrasegna: </p>

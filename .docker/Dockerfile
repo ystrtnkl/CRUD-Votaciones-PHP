@@ -15,6 +15,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
       libicu-dev \
       zlib1g-dev \
       libxml2 \
+      php-mongodb \
       libxml2-dev \
       libreadline-dev \
       supervisor \

@@ -6,7 +6,7 @@
 <main>
     <h2>Registrarse</h2>
 
-    <form action="api/registrar.php" method="POST">
+    <form action="api/crearUsuario" method="POST">
         <p>Nombre:</p> 
         <input type="text" name="nombre" id="nombre"><br>
         <p>Correo:</p> 
@@ -15,7 +15,7 @@
         <input type="password" name="contrasegna" id="contrasegna"><br>
         <p>Repetir contraseña:</p> 
         <input type="password" name="contrasegna2" id="contrasegna2"><br>
-        <input class="btn btn-primary" type="submit" value="Iniciar sesión" id="submit">
+        <input class="btn btn-primary" type="submit" value="Registrarse" id="submit">
     </form>
 
     <button class="btn btn-primary" type="button" id="generar">Generar contrasegna automatica</button> <br>

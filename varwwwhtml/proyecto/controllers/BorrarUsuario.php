@@ -6,12 +6,12 @@
     use Models\Respuesta;
     use Controllers\Interfaces\Borrar;
     class BorrarUsuario implements Borrar {
-        public function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public function borrar($uuid): bool {
+        public static function borrar($uuid): bool {
             //borrar el usuario y sus encuestas y respuestas asociadas
             return true;
         }

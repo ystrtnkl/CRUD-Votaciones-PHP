@@ -30,5 +30,5 @@ function generarContrasegna(int $longitud = 12, bool $esPin = false): string {
     } while ($posMinus === $posNum || $posMinus === $posSimb || $posMinus === $posMayus);
     $randMinus = rand(0, strlen($charsMinusculas) - 1);
     $texto[$posMinus] = $charsMinusculas[$randMinus];
-    return $texto;
+    return (string) $texto;
 }

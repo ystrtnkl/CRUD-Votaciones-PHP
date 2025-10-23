@@ -6,12 +6,12 @@
     use Models\Respuesta;
     use Controllers\Interfaces\Modificar;
     class ModificarEncuesta implements Modificar {
-        public function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public function modificar($id, $encuestaNueva): bool {
+        public static function modificar($id, $encuestaNueva): bool {
             //modifica datos basicos de la encuesta
             return true;
         }

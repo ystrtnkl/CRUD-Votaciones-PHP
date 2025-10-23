@@ -13,7 +13,7 @@
         private $fechaCreado;
         private $esAdmin;
 
-        public function __construct($nombre, $correo, $uuid = "", $contrasegna = "", $fechaCreado = "", $esAdmin = false) {
+        public function __construct($nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n') {
             try {
                 try {
                     Validator::uuid()->check($uuid);
@@ -27,12 +27,15 @@
                 } catch (ValidationException $e) {
                     $contrasegna = generarContrasegna();
                 }
+                $contrasegna = (string) $contrasegna;
                 try {
                     Validator::stringType()->notEmpty()->check($fechaCreado);
                 } catch (ValidationException $e) {
-                    $fechaCreado = time();
+                    $fechaCreado = (string) time();
                 }
-                Validator::boolType()->check($esAdmin);
+                if ($esAdmin !== 's') {
+                    $esAdmin = 'n';
+                }
                 $this->uuid = $uuid;
                 $this->nombre = $nombre;
                 $this->correo = $correo;
@@ -40,7 +43,8 @@
                 $this->esAdmin = $esAdmin;
                 $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
             } catch (ValidationException $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
+                throw $e;
             }
         }
         public function getUuid() {
@@ -72,7 +76,7 @@
                 $this->nombre = $nombre;
                 return $this;
             } catch (ValidationException $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
                 return null;
             }
         }
@@ -82,7 +86,7 @@
                 $this->correo = $correo;
                 return $this;
             } catch (ValidationException $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
                 return null;
             }
         }
@@ -92,7 +96,7 @@
                 $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
                 return $this;
             } catch (ValidationException $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
                 return null;
             }
         }

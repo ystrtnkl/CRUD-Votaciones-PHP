@@ -28,7 +28,7 @@
                 try {
                     Validator::stringType()->notEmpty()->check($fechaCreado);
                 } catch (ValidationException $e) {
-                    $fechaCreado = time();
+                    $fechaCreado = (string) time();
                 }
                 if ($usuario->getUuid() === $encuesta->getUsuario()->getUuid()) {
                     throw new Exception("El usuario no puede responder a su propia encuesta.");
@@ -44,12 +44,14 @@
                 $this->id = $id;
                 $this->usuario = $usuario;
                 $this->encuesta = $encuesta;
-                $this->fechaCreado = time();
+                $this->fechaCreado = $fechaCreado;
                 $this->contenido = $contenido;
             } catch (ValidationException $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
+                throw $e;
             } catch (Exception $e) {
-                echo "Error en los datos: " . $e;
+                //echo "Error en los datos: " . $e;
+                throw $e;
             }
         }
 

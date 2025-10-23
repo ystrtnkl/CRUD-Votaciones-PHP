@@ -3,7 +3,6 @@
 <body>
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <main>
-    <?php include_once DIR_API . "ca_verUsuario.php" ?>
     <h2>Ver usuario</h2>
     <p>requiere variable en url</p>
     <p>requiere tener cuenta</p>

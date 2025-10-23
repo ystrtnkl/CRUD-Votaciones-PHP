@@ -4,7 +4,7 @@
     use Respect\Validation\Validator;
     use Respect\Validation\Exceptions\ValidationException;
     include_once(DIR_CONTROLLERS . "c_generarContrasegna.php");
-    class Usuario {
+    class Usuario implements \JsonSerializable {
 
         private $uuid;
         private $nombre;
@@ -100,5 +100,17 @@
                 return null;
             }
         }
+
+        public function jsonSerialize(): mixed
+        {
+            return [
+              "uuid"=>$this->uuid,
+              "nombre"=>$this->nombre,
+              "correo"=>$this->correo,
+              "contrasegna"=>$this->contrasegna,
+              "fechaCreado"=>$this->fechaCreado,
+              "esAdmin"=>$this->esAdmin
+            ];
+    }
     }
 ?>

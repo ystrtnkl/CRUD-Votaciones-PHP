@@ -13,7 +13,12 @@
 
         public static function leer($uuid) {
             //datos del usuario y posiblemente sus encuestas y respuestas dependiendo de autorizaciones
-            return $uuid;
+            return new Usuario("hola", "hola@hola.com", "a9sd8f793", $uuid);
+        }
+
+        public static function iniciarSesion($correo, $contrasegna) {
+            //decodificar contrasegna y comparar
+            return new Usuario("hola", $correo, $contrasegna, );
         }
     
         public static function leerTodos(): array {

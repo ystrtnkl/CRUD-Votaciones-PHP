@@ -6,7 +6,7 @@
     use Models\Usuario;
     use Models\TipoPermisos;
     use Exception;
-    class Encuesta {
+    class Encuesta implements \JsonSerializable {
         private $id;
         private $nombre;
         private $contenido;
@@ -108,5 +108,19 @@
                 return null;
             }
         }
+
+        public function jsonSerialize(): mixed
+        {
+            return [
+              "id"=>$this->id,
+              "nombre"=>$this->nombre,
+              "contenido"=>$this->contenido,
+              "usuario"=>$this->usuario->getUuid(),
+              "tipoPermisos"=>strtoupper($this->tipoPermisos->name),
+              "foto"=>$this->foto??"",
+              "fechaCreado"=>$this->fechaCreado
+            ];
+        }
+
     }
 ?>

@@ -14,20 +14,22 @@
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
     $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
+    $esApi = isset($_POST['esApi']);
 
     header('Content-Type: application/json; charset=utf-8');
     try {
         $usuario = new Usuario($nombre, $correo, $contrasegna);
         CrearUsuario::crear($usuario);
-        /*$response = (object)[
+        if ($esApi) {
+            $response = (object)[
             'success' => true,
-            //'data' => (object)$data,
+            'data' => (object)$usuario->jsonSerialize(),
             'message' => 'Usuario creado correctamente.'
-        ];
-        echo json_encode($response, JSON_UNESCAPED_UNICODE);*/
-        http_response_code(303);
-        header('Location: /verUsuario?uuid=' . $usuario->getUuid());
-
+            ];
+            echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        } else {
+            header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);
+        }
     } catch (\Exception $e) {
         echo $e->getMessage();
         http_response_code(400);

@@ -11,7 +11,7 @@
             return true;
         }
 
-        public static function borrar($uuid): bool {
+        public static function borrar($uuid, $contrasegna): bool {
             //borrar el usuario y sus encuestas y respuestas asociadas
             return true;
         }

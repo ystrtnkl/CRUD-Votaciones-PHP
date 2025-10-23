@@ -6,7 +6,7 @@
     use Models\Usuario;
     use Models\Encuesta;
     use Exception;
-    class Respuesta {
+    class Respuesta implements \JsonSerializable {
         private $id;
         private $contenido;
         private $usuario;
@@ -73,6 +73,17 @@
         public function __toString()
         {
             return $this->id;
+        }
+
+        public function jsonSerialize(): mixed
+        {
+            return [
+              "id"=>$this->id,
+              "contenido"=>$this->contenido,
+              "usuario"=>$this->usuario->getUuid(),
+              "encuesta"=>$this->encuesta->getUuid(),
+              "fechaCreado"=>$this->fechaCreado
+            ];
         }
     }
 ?>

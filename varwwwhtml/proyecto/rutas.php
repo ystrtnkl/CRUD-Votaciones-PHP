@@ -3,6 +3,7 @@
     use Phroute\Phroute\RouteCollector; #Incluir libreria de rutas (despues de configurar apache para que rediriga siempre a index.php)
     use Phroute\Phroute\Exception\HttpRouteNotFoundException;
     use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
+    use Controllers\LeerUsuario;
 
     $router = new RouteCollector(); #Crear el enrutador
 
@@ -37,6 +38,17 @@
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/verUsuario', function(){
+        if (!isset($_GET['uuid'])) {
+            header('Location: /iniciarSesion', true, 303);
+            exit;
+        } else {
+            try {
+                $usuario = LeerUsuario::leer($_GET['uuid']);    
+            } catch (\Exception) {
+                header('Location: /iniciarSesion', true, 303);
+                exit;
+            }
+        }
         include_once(DIR_PUBLIC . "html/head.html");  
         include_once(DIR_VIEWS . "v_verUsuario.php");
         include_once(DIR_PUBLIC . "html/end.html");
@@ -69,34 +81,40 @@
     });
     
 
+
+
+
+    $router->get('/api/iniciarSesion', function(){
+        include_once(DIR_API . "ca_login.php");
+    });
     $router->post('/api/crearUsuario', function(){
         include_once(DIR_API . "ca_crearUsuario.php");
     });
     $router->post('/api/borrarUsuario', function(){
         include_once(DIR_API . "ca_borrarUsuario.php");
     });
-    $router->post('/api/leerUsuario', function(){
+    $router->get('/api/leerUsuario', function(){
         include_once(DIR_API . "ca_leerUsuario.php");
     });
-    $router->post('/api/modificarUsuario', function(){
+    $router->put('/api/modificarUsuario', function(){
         include_once(DIR_API . "ca_modificarUsuario.php");
     });
     $router->post('/api/crearEncuesta', function(){
         include_once(DIR_API . "ca_crearEncuesta.php");
     });
-    $router->post('/api/borrarEncuesta', function(){
+    $router->delete('/api/borrarEncuesta', function(){
         include_once(DIR_API . "ca_borrarEncuesta.php");
     });
-    $router->post('/api/leerEncuesta', function(){
+    $router->get('/api/leerEncuesta', function(){
         include_once(DIR_API . "ca_leerEncuesta.php");
     });
-    $router->post('/api/modificarEncuesta', function(){
+    $router->put('/api/modificarEncuesta', function(){
         include_once(DIR_API . "ca_modificarEncuesta.php");
     });
     $router->post('/api/crearRespuesta', function(){
         include_once(DIR_API . "ca_crearRespuesta.php");
     });
-    $router->post('/api/leerRespuesta', function(){
+    $router->get('/api/leerRespuesta', function(){
         include_once(DIR_API . "ca_leerRespuesta.php");
     });
 
@@ -132,11 +150,13 @@
     } catch (HttpRouteNotFoundException $e)  {
         include_once(DIR_PUBLIC . "html/head.html"); 
         $error = 404;
+        echo $error;
         include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     } catch (HttpMethodNotAllowedException $e) {
         include_once(DIR_PUBLIC . "html/head.html"); 
         $error = 405;
+        echo $error;
         include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     }

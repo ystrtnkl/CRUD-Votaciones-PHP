@@ -96,19 +96,19 @@
     $router->get('/api/leerUsuario', function(){
         include_once(DIR_API . "ca_leerUsuario.php");
     });
-    $router->put('/api/modificarUsuario', function(){
+    $router->post('/api/modificarUsuario', function(){
         include_once(DIR_API . "ca_modificarUsuario.php");
     });
     $router->post('/api/crearEncuesta', function(){
         include_once(DIR_API . "ca_crearEncuesta.php");
     });
-    $router->delete('/api/borrarEncuesta', function(){
+    $router->post('/api/borrarEncuesta', function(){
         include_once(DIR_API . "ca_borrarEncuesta.php");
     });
     $router->get('/api/leerEncuesta', function(){
         include_once(DIR_API . "ca_leerEncuesta.php");
     });
-    $router->put('/api/modificarEncuesta', function(){
+    $router->post('/api/modificarEncuesta', function(){
         include_once(DIR_API . "ca_modificarEncuesta.php");
     });
     $router->post('/api/crearRespuesta', function(){

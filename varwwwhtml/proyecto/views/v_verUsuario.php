@@ -19,11 +19,24 @@
     <h2>Eliminar</h2>
     <form action="/api/borrarUsuario" method="POST">
         <input type="hidden" name="uuid" value="<?=$usuario->getUuid()?>">
-        <input type="hidden" name="contrasegna" value="<?=$usuario->getContrasegna()?>">
+        <input type="hidden" name="contrasegna" value="<?=$usuario->getContrasegna()?>"> <!--PELIGROOOOOOOOOOO -->
         <input type="submit" value="ELIMINAR">
     </form>
     <h2>Editar datos</h2>
-    <p>a</p>
+    <p>Déjalos en blanco para no editarlos</p>
+    <form action="/api/modificarUsuario" method="POST">
+        Nuevo nombre: <input type="text" name="nombre" placeholder="<?=$usuario->getNombre()?>"><br>
+        Nuevo correo: <input type="email" name="correo" placeholder="<?=$usuario->getCorreo()?>"><br>
+        Nueva contrasegna: <input type="password" name="contrasegna"><br>
+        Nueva contrasegna otra vez: <input type="password" name="contrasegna2"><br>
+        <input type="hidden" name="uuid" value="<?=$usuario->getUuid()?>">
+        <input type="submit" value="Editar usuario">
+    </form>
+    <p>Cambia tu foto:</p>
+    <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
+        Nueva foto: <input type="file" name="foto"><br>
+        <input type="hidden" name="uuid" value="<?=$usuario->getUuid()?>">
+    </form>
     <h2>Tus encuestas</h2>
     <p>a</p>
     

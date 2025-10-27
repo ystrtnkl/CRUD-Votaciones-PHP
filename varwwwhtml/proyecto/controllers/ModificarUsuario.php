@@ -11,8 +11,13 @@
             return true;
         }
 
-        public static function modificar($id, $usuarioNuevo): bool {
+        public static function modificar($uuid, $usuarioNuevo): bool {
             //modifica datos basicos del usuario, y comprobar que la imagen este guardada
+            return true;
+        }
+        
+        public static function modificarDatos($uuid, $nombre, $correo, $contrasegna, $urlFoto): bool {
+            //modifica solo los datos presentes
             return true;
         }
 

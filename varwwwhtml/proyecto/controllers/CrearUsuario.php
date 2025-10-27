@@ -5,6 +5,7 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Crear;
+    use Controllers\EjecutarConsulta;
     class CrearUsuario implements Crear {
         public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario no existe aun, solo se validan los datos

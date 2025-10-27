@@ -5,6 +5,7 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Borrar;
+    use Controllers\EjecutarConsulta;
     class BorrarEncuesta implements Borrar {
         public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto

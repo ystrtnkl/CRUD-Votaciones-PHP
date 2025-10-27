@@ -3,13 +3,8 @@
     //use Exception;
     use Controllers\CrearUsuario;
 
-    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        http_response_code(405);
-        header("Content-Type: text/plain");
-        echo "Error 405, POST requerido";
-        exit;
-    }
-    
+    $metodoRequerido = "POST";
+    include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
@@ -31,14 +26,7 @@
             header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);
         }
     } catch (\Exception $e) {
-        echo $e->getMessage();
-        http_response_code(400);
-        $response = (object)[
-            'success' => false,
-            'error' => 'Datos inválidos',
-        ];
-        echo json_encode($response, JSON_UNESCAPED_UNICODE);
-        exit;
+        include_once(DIR_FUNCTIONS . "c_error400Json.php");
     }
 
 ?>

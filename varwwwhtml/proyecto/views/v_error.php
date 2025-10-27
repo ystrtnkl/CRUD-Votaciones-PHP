@@ -5,10 +5,10 @@
 <?php 
     $mensaje = "";
     if (isset($error)) {
-        if ($error = 404) {
+        if ($error === 404) {
             $mensaje = "Ruta no encontrada";
         }
-        if ($error = 405) {
+        if ($error === 405) {
             $mensaje = "Metodo HTTP no permitido";
         }
     } else {

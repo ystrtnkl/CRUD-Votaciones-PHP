@@ -5,6 +5,7 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Leer;
+    use Controllers\EjecutarConsulta;
     class LeerUsuario implements Leer {
         public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna (los usuarios son todos publicos)

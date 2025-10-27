@@ -13,7 +13,7 @@
 </head>
 <body>
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
-<?php require(DIR_CONTROLLERS . "c_generarContrasegna.php") ?>
+<?php require(DIR_FUNCTIONS . "c_generarContrasegna.php") ?>
 <main>
     
 <h2>Subir una FOTO a las fotos de perfil</h2>

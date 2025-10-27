@@ -76,7 +76,7 @@
     });
     $router->get('/admin', function(){
         include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "v_admin.php");
+        include_once(DIR_VIEWS . "admin/v_admin.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
     
@@ -147,16 +147,20 @@
         $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         echo $response; #Mostrar en el navegador lo conseguido en la ruta
 
+    } catch (HttpMethodNotAllowedException $e) {
+        include_once(DIR_PUBLIC . "html/head.html"); 
+        $error = 405;
+        echo $error;
+        include_once(DIR_VIEWS . "v_error.php");
+        include_once(DIR_PUBLIC . "html/end.html");
     } catch (HttpRouteNotFoundException $e)  {
         include_once(DIR_PUBLIC . "html/head.html"); 
         $error = 404;
         echo $error;
         include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
-    } catch (HttpMethodNotAllowedException $e) {
-        include_once(DIR_PUBLIC . "html/head.html"); 
-        $error = 405;
-        echo $error;
+    } catch (\Error $e) {
+        include_once(DIR_PUBLIC . "html/head.html");
         include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     }

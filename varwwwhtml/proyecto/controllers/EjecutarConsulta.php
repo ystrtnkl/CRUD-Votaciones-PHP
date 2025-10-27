@@ -7,6 +7,7 @@
     class EjecutarConsulta {
         public static function ejecutar($consulta): bool {
             //conectar con la base de datos y ejecutar la consulta, si la consulta no es maliciosa
+            //devolver true o los posibles datos
             return EjecutarConsulta::comprobar($consulta);
         }
 

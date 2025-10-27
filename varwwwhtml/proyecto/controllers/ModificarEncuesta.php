@@ -5,6 +5,7 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Modificar;
+    use Controllers\EjecutarConsulta;
     class ModificarEncuesta implements Modificar {
         public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto

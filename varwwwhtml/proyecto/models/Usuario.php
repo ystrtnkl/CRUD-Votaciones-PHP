@@ -3,7 +3,7 @@
     use Ramsey\Uuid\Uuid;
     use Respect\Validation\Validator;
     use Respect\Validation\Exceptions\ValidationException;
-    include_once(DIR_CONTROLLERS . "c_generarContrasegna.php");
+    include_once(DIR_FUNCTIONS . "c_generarContrasegna.php");
     class Usuario implements \JsonSerializable {
 
         private $uuid;

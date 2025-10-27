@@ -5,6 +5,7 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Crear;
+    use Controllers\EjecutarConsulta;
     class CrearEncuesta implements Crear {
         public static function autorizarAccion($usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna

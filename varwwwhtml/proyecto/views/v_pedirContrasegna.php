@@ -2,7 +2,7 @@
 </head>
 <body>
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
-<?php require(DIR_CONTROLLERS . "c_generarContrasegna.php") ?>
+<?php require(DIR_FUNCTIONS . "c_generarContrasegna.php") ?>
 <main>
     <h2>Contrasegna de ejemplo</h2>
     <p>Genera una contrasegna de 4 a 70 caracteres asegurandose de que tiene numeros, simbolos, mayusculas y minusculas</p>

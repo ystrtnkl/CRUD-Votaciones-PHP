@@ -34,7 +34,8 @@
     </form>
     <p>Cambia tu foto:</p>
     <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
-        Nueva foto: <input type="file" name="foto"><br>
+        Nueva foto: <input type="file" name="foto" accept=".jpg,.jpeg,.png,.gif"><br>
+        <input type="hidden" name="esParaPerfil" value="s">
         <input type="hidden" name="uuid" value="<?=$usuario->getUuid()?>">
     </form>
     <h2>Tus encuestas</h2>

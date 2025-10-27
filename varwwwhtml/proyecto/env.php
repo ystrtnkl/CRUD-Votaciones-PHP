@@ -13,6 +13,7 @@
     #define('DIR_VIEWS','views/');
     const DIR_VIEWS = "views/";
     const DIR_CONTROLLERS = "controllers/";
+    const DIR_FUNCTIONS = "controllers/functions/";
     const DIR_MODELS = "models/";
     const DIR_SQL = "sql/";
     const DIR_MEDIA = "media/";

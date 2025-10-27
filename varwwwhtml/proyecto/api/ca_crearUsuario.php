@@ -1,7 +1,10 @@
 <?php
     use Models\Usuario;
-    //use Exception;
     use Controllers\CrearUsuario;
+
+    //CREAR un usuario mediante su nombre, correo y contrasegna
+    //Metodo POST y todos los campos validados
+    //esApi para recibir una respuesta en JSON, si no devuelve a /verUsuario?uuid=x
 
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");

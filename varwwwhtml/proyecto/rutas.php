@@ -8,6 +8,8 @@
     $router = new RouteCollector(); #Crear el enrutador
 
     #Creando rutas, que tienen que devolver un texto (el contenido a mostrar)
+
+    //VISTAS:
     $router->get('/', function(){
         #return "<script>window.location.pathname = 'inicio'</script>";
         header("Location: /inicio", true, 301);
@@ -83,9 +85,12 @@
 
 
 
-
-    $router->get('/api/iniciarSesion', function(){
+    //API:
+    $router->post('/api/iniciarSesion', function(){
         include_once(DIR_API . "ca_login.php");
+    });
+    $router->get('/api/cerrarSesion', function(){
+        include_once(DIR_API . "ca_logout.php");
     });
     $router->post('/api/crearUsuario', function(){
         include_once(DIR_API . "ca_crearUsuario.php");
@@ -128,7 +133,6 @@
         #pidiendo parametros por la url, en este caso el endpoint devuelve un texto plano y no html (en el propio archivo)
         include_once(DIR_API . "ca_devolverContrasegnaTamagno.php");
     });
-
     $router->post('/api/guardarFotoPerfil', function(){
         include_once(DIR_API . "ca_guardarFoto.php");
     });

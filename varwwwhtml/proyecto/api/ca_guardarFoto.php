@@ -1,5 +1,10 @@
 <?php
 
+//Recibe un uuid y una foto, y la guarda, y asigna a ese usuario esa foto
+
+$metodoRequerido = "POST";
+include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+
 if (isset($_POST['btnSubir']) && $_POST['btnSubir'] == 'Subir' && isset($_POST["uuid"]) && $_POST["uuid"] != "") {
     if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
         $nombre = $_FILES['foto']['name'];

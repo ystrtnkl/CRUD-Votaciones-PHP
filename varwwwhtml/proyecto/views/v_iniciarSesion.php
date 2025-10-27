@@ -5,7 +5,7 @@
 <main>
     <h2>Iniciar sesion</h2>
     <p>Si ya tienes una sesión iniciada, se cerrará</p>
-    <form action="/api/iniciarSesion" method="GET">
+    <form action="/api/iniciarSesion" method="POST">
         <p>Correo: </p>
         <input type="email" name="correo"><br>
         <p>Contrasegna: </p>

@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     require_once("env.php"); #Globales
     
     include_once("vendor/autoload.php"); #Obligatorio para composer

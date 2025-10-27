@@ -1,6 +1,6 @@
 <?php
-//namespace Controllers;
-#Longitud concreta, se asegura de tener minúsculas, números, símbolos y mayúsculas
+
+//Genera una contrasegna con longitud concreta, se asegura de tener minúsculas, numeros, simbolos y mayusculas
 function generarContrasegna(int $longitud = 12, bool $esPin = false): string {
     if ($longitud < 4 || !is_numeric($longitud) || $longitud > 70) {
         $longitud = 12;

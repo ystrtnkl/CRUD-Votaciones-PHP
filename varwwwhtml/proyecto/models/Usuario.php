@@ -4,14 +4,15 @@
     use Respect\Validation\Validator;
     use Respect\Validation\Exceptions\ValidationException;
     include_once(DIR_FUNCTIONS . "c_generarContrasegna.php");
+    //Objeto que representa un usuario
     class Usuario implements \JsonSerializable {
 
-        private $uuid;
-        private $nombre;
-        private $correo;
-        private $contrasegna;
-        private $fechaCreado;
-        private $esAdmin;
+        private $uuid; //Su uuid
+        private $nombre; //Nombre de usuario
+        private $correo; //Correo del usuario
+        private $contrasegna; //Contrasegna encriptada del usuario
+        private $fechaCreado; //Timestamp de la creacion
+        private $esAdmin; //Si es admin o no (solo cambiable en la base de datos)
 
         public function __construct($nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n') {
             try {
@@ -36,6 +37,7 @@
                 if ($esAdmin !== 's') {
                     $esAdmin = 'n';
                 }
+                
                 $this->uuid = $uuid;
                 $this->nombre = $nombre;
                 $this->correo = $correo;

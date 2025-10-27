@@ -14,6 +14,7 @@
 
         public static function leer($uuid) {
             //datos del usuario y posiblemente sus encuestas y respuestas dependiendo de autorizaciones
+            //ejemplo 6b1f208d-b7ae-4bf0-b719-26ff92fc9648
             return new Usuario("hola", "hola@hola.com", "a9sd8f793", $uuid);
         }
 

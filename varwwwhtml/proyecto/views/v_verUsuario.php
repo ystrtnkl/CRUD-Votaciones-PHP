@@ -5,6 +5,12 @@
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <main>
     <h2>Ver usuario</h2>
+    <!-- CERRAR SESION Y LOGOUT SOLO SI NO ES EL DUEGNO -->
+    <!--<form action="/api/cerrarSesion" method="GET">
+        <input type="hidden" name="uuid" value="<?=$usuario->getUuid()?>">
+        <input type="submit" value="Cerrar sesion">
+    </form>-->
+    <a href="/api/cerrarSesion">Cerrar sesion</a>
     <p>requiere variable en url</p>
     <p>requiere tener cuenta</p>
 

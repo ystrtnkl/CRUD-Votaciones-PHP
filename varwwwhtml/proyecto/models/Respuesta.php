@@ -6,12 +6,13 @@
     use Models\Usuario;
     use Models\Encuesta;
     use Exception;
+    //Objeto que representa una respuesta de un usuario a la encuesta de otro usuario
     class Respuesta implements \JsonSerializable {
-        private $id;
-        private $contenido;
-        private $usuario;
-        private $encuesta;
-        private $fechaCreado;
+        private $id; //uuid
+        private $contenido; //Contenido de la respuesta
+        private $usuario; //Usuario que hizo la respuesta
+        private $encuesta; //A que encuesta responde
+        private $fechaCreado; //Timestamp de la creacion
 
         public function __construct($usuario, $encuesta, $id = "", $contenido = "Nada", $fechaCreado = "") {
             try {
@@ -38,8 +39,6 @@
                 } else if ($encuesta->getTipoPermisos() === 'w' && !in_array($usuario->getUuid(), $encuesta->getPermisos())) {
                     throw new Exception("El usuario no esta permitido en esta encuesta.");
                 }
-                
-
 
                 $this->id = $id;
                 $this->usuario = $usuario;

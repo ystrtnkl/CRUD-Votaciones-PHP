@@ -1,4 +1,7 @@
 <?php
+
+//Devuelve un error por fallo de datos
+
 if (isset($_POST['esApi']) || isset($_GET['esApi']) || isset($_PUT['esApi']) || isset($_DELETE['esApi'])) {
     echo $e->getMessage();
     //http_response_code(400);

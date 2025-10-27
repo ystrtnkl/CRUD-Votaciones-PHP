@@ -1,7 +1,10 @@
 <?php
     use Models\Usuario;
-    //use Exception;
     use Controllers\ModificarUsuario;
+
+    //MODIFICAR un usuario mediante su uuid cambiando su posible nombre, correo, contrasegna
+    //Metodo POST y todos los campos validados
+    //esApi para recibir una respuesta en JSON, si no devuelve a /verUsuario?uuid=x
 
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");

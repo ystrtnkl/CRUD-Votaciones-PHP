@@ -2,15 +2,17 @@
     use Models\Usuario;
     use Controllers\BorrarUsuario;
 
+    //BORRAR un usuario mediante su UUID y contrasegna
+    //Metodo POST y todos los campos validados
+    //esApi para recibir una respuesta en JSON, si no devuelve a /
+
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
     
-
     $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;
     $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
     $esApi = isset($_POST['esApi']);
 
-    //header('Content-Type: application/json; charset=utf-8');
     try {
         BorrarUsuario::borrar($uuid, $contrasegna);
         if ($esApi) {

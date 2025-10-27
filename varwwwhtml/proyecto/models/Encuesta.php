@@ -5,16 +5,16 @@
     use Respect\Validation\Exceptions\ValidationException;
     use Models\Usuario;
     use Models\TipoPermisos;
-    use Exception;
+    //Clase representativa de una encuesta
     class Encuesta implements \JsonSerializable {
-        private $id;
-        private $nombre;
-        private $contenido;
-        private $usuario;
-        private $permisos;
-        private TipoPermisos $tipoPermisos;
-        private $foto;
-        private $fechaCreado;
+        private $id; //uuid
+        private $nombre; //Titulo de la encuesta
+        private $contenido; //Preguntas o contenido
+        private $usuario; //Usuario creador de la encuesta
+        private $permisos; //Lista con los uuid de los usuarios
+        private TipoPermisos $tipoPermisos; //B = blacklist, W = whitelist, N = nada
+        private $foto; //Url a la foto de la portada
+        private $fechaCreado; //Timestamp de su creacion
 
         public function __construct($nombre, $usuario, $id = "", $contenido = "Nada", $permisos = [], $tipoPermisos = TipoPermisos::N, $foto = "", $fechaCreado = "") {
             try {
@@ -37,7 +37,7 @@
                     $fechaCreado = (string) time();
                 }
                 if (in_array($usuario->getUuid(), $permisos) && $tipoPermisos !== 'n') {
-                    throw new Exception("El creador no tiene relevancia en los permisos de su encuesta.");
+                    throw new \Exception("El creador no tiene relevancia en los permisos de su encuesta.");
 
                 }
                 
@@ -52,7 +52,7 @@
             } catch (ValidationException $e) {
                 //echo "Error en los datos: " . $e;
                 throw $e;
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 //echo "Error en los datos: " . $e;
                 throw $e;
             }

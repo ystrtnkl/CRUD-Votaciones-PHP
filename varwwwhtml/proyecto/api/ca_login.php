@@ -1,9 +1,12 @@
 <?php
     use Models\Usuario;
-    //use Exception;
     use Controllers\LeerUsuario;
 
-    $metodoRequerido = "GET";
+    //Login con un usuario mediante su correo y contrasegna
+    //Metodo GET y todos los campos validados
+    //esApi para recibir una respuesta en JSON con los datos del usuario, si no devuelve a /verUsuario?uuid=x y inicia sesion
+
+    $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
     $correo = isset($_GET['correo']) ? $_GET['correo'] : null;
@@ -14,6 +17,7 @@
     try {
         //header('Content-Type: application/json; charset=utf-8');
         $usuario = LeerUsuario::iniciarSesion($correo, $contrasegna);
+        $_SESSION['usuario'] = $usuario;
         if ($esApi) {
             echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
         } else {

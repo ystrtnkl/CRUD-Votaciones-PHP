@@ -1,7 +1,10 @@
 <?php
     use Models\Usuario;
-    //use Exception;
     use Controllers\LeerUsuario;
+
+    //LEER un usuario mediante su UUID
+    //Metodo GET y todos los campos validados (y que el usuario exista)
+    //Devuelve el objeto en formato JSON
 
     $metodoRequerido = "GET";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");

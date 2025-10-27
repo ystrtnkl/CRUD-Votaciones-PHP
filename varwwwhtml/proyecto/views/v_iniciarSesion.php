@@ -7,9 +7,9 @@
     <p>Si ya tienes una sesión iniciada, se cerrará</p>
     <form action="/api/iniciarSesion" method="POST">
         <p>Correo: </p>
-        <input type="email" name="correo"><br>
+        <input required type="email" name="correo"><br>
         <p>Contrasegna: </p>
-        <input type="password" name="contrasegna"><br>
+        <input required type="password" name="contrasegna"><br>
         <input class="btn btn-primary" type="submit" value="Iniciar sesión">
     </form>
     <a href="/registrarse">No tengo cuenta</a>

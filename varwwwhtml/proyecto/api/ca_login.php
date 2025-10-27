@@ -9,15 +9,14 @@
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
-    $correo = isset($_GET['correo']) ? $_GET['correo'] : null;
-    $contrasegna = isset($_GET['contrasegna']) ? $_GET['contrasegna'] : null;
+    $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
+    $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
     $esApi = isset($_POST['esApi']);
-
     
+    header('Content-Type: application/json; charset=utf-8');
     try {
-        //header('Content-Type: application/json; charset=utf-8');
         $usuario = LeerUsuario::iniciarSesion($correo, $contrasegna);
-        $_SESSION['usuario'] = $usuario;
+        include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
         } else {

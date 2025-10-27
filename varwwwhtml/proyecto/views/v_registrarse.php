@@ -8,13 +8,13 @@
 
     <form action="api/crearUsuario" method="POST">
         <p>Nombre:</p> 
-        <input type="text" name="nombre" id="nombre"><br>
+        <input required type="text" name="nombre" id="nombre"><br>
         <p>Correo:</p> 
-        <input type="email" name="correo" id="correo"><br>
+        <input required type="email" name="correo" id="correo"><br>
         <p>Contrasegna:</p> 
-        <input type="password" name="contrasegna" id="contrasegna"><br>
+        <input required type="password" name="contrasegna" id="contrasegna"><br>
         <p>Repetir contraseña:</p> 
-        <input type="password" name="contrasegna2" id="contrasegna2"><br>
+        <input required type="password" name="contrasegna2" id="contrasegna2"><br>
         <input class="btn btn-primary" type="submit" value="Registrarse" id="submit">
     </form>
 

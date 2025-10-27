@@ -40,7 +40,7 @@
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/verUsuario', function(){
-        if (!isset($_GET['uuid'])) {
+        /*if (!isset($_GET['uuid'])) {
             header('Location: /iniciarSesion', true, 303);
             exit;
         } else {
@@ -50,7 +50,7 @@
                 header('Location: /iniciarSesion', true, 303);
                 exit;
             }
-        }
+        }*/
         include_once(DIR_PUBLIC . "html/head.html");  
         include_once(DIR_VIEWS . "v_verUsuario.php");
         include_once(DIR_PUBLIC . "html/end.html");

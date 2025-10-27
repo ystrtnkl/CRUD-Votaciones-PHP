@@ -13,9 +13,17 @@
         private $contrasegna; //Contrasegna encriptada del usuario
         private $fechaCreado; //Timestamp de la creacion
         private $esAdmin; //Si es admin o no (solo cambiable en la base de datos)
+        private $urlFoto; //La url de su foto de perfil
 
-        public function __construct($nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n') {
+        public function __construct($nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n', $urlFoto = "") {
             try {
+                if ($urlFoto !== "") {
+                    try {
+                        Validator::stringType()->notEmpty()->url()->check($urlFoto);
+                    } catch (\Exception $e) {
+                        $urlFoto = "";
+                    }
+                }
                 try {
                     Validator::uuid()->check($uuid);
                 } catch (ValidationException $e) {
@@ -37,13 +45,14 @@
                 if ($esAdmin !== 's') {
                     $esAdmin = 'n';
                 }
-                
+
                 $this->uuid = $uuid;
                 $this->nombre = $nombre;
                 $this->correo = $correo;
                 $this->fechaCreado = $fechaCreado;
                 $this->esAdmin = $esAdmin;
                 $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
+                $this->urlFoto = $urlFoto;
             } catch (ValidationException $e) {
                 //echo "Error en los datos: " . $e;
                 throw $e;
@@ -66,6 +75,9 @@
         }
         public function getEsAdmin() {
             return $this->esAdmin;
+        }
+        public function getUrlFoto() {
+            return $this->urlFoto;
         }
         public function __toString()
         {
@@ -99,6 +111,16 @@
                 return $this;
             } catch (ValidationException $e) {
                 //echo "Error en los datos: " . $e;
+                return null;
+            }
+        }
+
+        public function setUrlFoto($urlFoto) {
+            try {
+                Validator::stringType()->notEmpty()->url()->check($urlFoto);
+                $this->urlFoto = $urlFoto;
+                return $this;
+            } catch (ValidationException $e) {
                 return null;
             }
         }

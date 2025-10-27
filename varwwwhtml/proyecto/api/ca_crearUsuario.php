@@ -18,6 +18,7 @@
     try {
         $usuario = new Usuario($nombre, $correo, $contrasegna);
         CrearUsuario::crear($usuario);
+        include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             $response = (object)[
             'success' => true,

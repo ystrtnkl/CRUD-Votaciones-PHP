@@ -22,7 +22,7 @@
             ];
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
         } else {
-            header('Location: /', true, 303);
+            header('Location: /api/cerrarSesion', true, 303);
         }
     } catch (\Exception $e) {
         include_once(DIR_FUNCTIONS . "c_error400Json.php");

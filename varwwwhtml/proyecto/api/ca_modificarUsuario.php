@@ -21,7 +21,8 @@
     header('Content-Type: application/json; charset=utf-8');
     try {
         #$usuario = new Usuario($nombre, $correo, $contrasegna);
-        ModificarUsuario::modificarDatos($uuid, $nombre, $correo, $contrasegna, false);
+        $usuario = ModificarUsuario::modificarDatos($uuid, $nombre, $correo, $contrasegna, false);
+        include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             $response = (object)[
             'success' => true,

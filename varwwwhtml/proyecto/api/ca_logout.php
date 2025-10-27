@@ -11,8 +11,14 @@
     //$uuid = isset($_GET['uuid']) ? $_GET['uuid'] : null;
 
     try {
-        //cerrar sesion y borrar cookies
         unset($_SESSION["usuario"]);
+        unset($_SESSION["uuid"]);
+        unset($_SESSION["nombre"]);
+        unset($_SESSION["correo"]);
+        unset($_SESSION["fechaCreacion"]);
+        unset($_SESSION["esAdmin"]);
+        unset($_SESSION["urlFoto"]);
+        unset($_SESSION["contrasegna"]);
         session_destroy();
         header('Location: /iniciarSesion', true, 303);
     } catch (\Exception $e) {

@@ -4,7 +4,7 @@
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <main>
     <h2>Iniciar sesion</h2>
-    <p>Si ya tienes una sesión iniciada, se cerrará</p>
+    <p>Si ya tienes una sesión iniciada, se cerrara</p>
     <form action="/api/iniciarSesion" method="POST">
         <p>Correo: </p>
         <input required type="email" name="correo"><br>

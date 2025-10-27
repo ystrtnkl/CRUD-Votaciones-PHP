@@ -1,6 +1,8 @@
 <?php
     use Models\Usuario;
     use Controllers\LeerUsuario;
+    use Respect\Validation\Validator;
+    use Respect\Validation\Exceptions\ValidationException;
 
     //Login con un usuario mediante su correo y contrasegna
     //Metodo GET y todos los campos validados
@@ -10,7 +12,8 @@
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
+    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
+    
     $esApi = isset($_POST['esApi']);
     
     header('Content-Type: application/json; charset=utf-8');

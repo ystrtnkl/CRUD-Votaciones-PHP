@@ -38,8 +38,8 @@
         Otra vez: <input type="password" name="contrasegna2" required placeholder="<?=$_SESSION['contrasegna']?>"><br>
         Nuevo nombre: <input type="text" name="nombre" placeholder="<?=$_SESSION['nombre']?>"><br>
         Nuevo correo: <input type="email" name="correo" placeholder="<?=$_SESSION['correo']?>"><br>
-        Nueva contrasegna: <input type="password" name="contrasegna"><br>
-        Nueva contrasegna otra vez: <input type="password" name="contrasegna2"><br>
+        Nueva contrasegna: <input type="password" name="nuevaContrasegna"><br>
+        Nueva contrasegna otra vez: <input type="password" name="nuevaContrasegna2"><br>
         <input type="hidden" name="uuid" value="<?=$_SESSION['uuid']?>">
         <input type="submit" value="Editar usuario">
     </form>
@@ -50,7 +50,7 @@
         <input type="hidden" name="uuid" value="<?=$_SESSION['uuid']?>">
         <input type="submit" value="Editar foto">
     </form>
-    <h2>Tus encuestas</h2>
+    <h2>Encuestas del usuario</h2>
     <?php } ?>
     <p>a</p>
     

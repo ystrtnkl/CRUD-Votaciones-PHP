@@ -5,7 +5,7 @@
 <?php require(DIR_FUNCTIONS . "c_generarContrasegna.php") ?>
 <main>
     <h2>Registrarse</h2>
-
+    <p>Si ya tienes una sesión iniciada, se cerrara</p>
     <form action="api/crearUsuario" method="POST">
         <p>Nombre:</p> 
         <input required type="text" name="nombre" id="nombre"><br>

@@ -1,6 +1,8 @@
 <?php
     use Models\Usuario;
     use Controllers\ModificarUsuario;
+    use Respect\Validation\Validator;
+    use Respect\Validation\Exceptions\ValidationException;
 
     //MODIFICAR un usuario mediante su uuid cambiando su posible nombre, correo, contrasegna
     //Metodo POST y todos los campos validados
@@ -11,15 +13,25 @@
 
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
+    $nuevaContrasegna = isset($_POST['nuevaContrasegna']) ? password_hash($_POST['nuevaContrasegna'], PASSWORD_BCRYPT) : null;
+    //$nuevaContrasegna2 = isset($_POST['nuevaContrasegna2']) ? password_hash($_POST['nuevaContrasegna2'], PASSWORD_BCRYPT) : null;
     $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;
     $nombre = $nombre === "" || $nombre === null ? false : $nombre;
     $correo = $correo === "" || $correo === null ? false : $correo;
-    $contrasegna = $contrasegna === "" || $contrasegna === null ? false : $contrasegna;
+    $nuevaContrasegna = $nuevaContrasegna === "" || $nuevaContrasegna === null ? false : $nuevaContrasegna;
+    //$nuevaContrasegna2 = $nuevaContrasegna2 === "" || $nuevaContrasegna2 === null ? false : $nuevaContrasegna2;
     $esApi = isset($_POST['esApi']);
+    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
+    //$contrasegna2 = isset($_POST['contrasegna2']) ? password_hash($_POST['contrasegna2'], PASSWORD_BCRYPT) : null;
 
     header('Content-Type: application/json; charset=utf-8');
     try {
+        /*if ($contrasegna2 !== $contrasegna) {
+            throw new Exception("Contrasegnas no coinciden");
+        }
+        if ($nuevaContrasegna2 !== $nuevaContrasegna) {
+            throw new Exception("Contrasegnas nuevas no coinciden");
+        }*/
         #$usuario = new Usuario($nombre, $correo, $contrasegna);
         $usuario = ModificarUsuario::modificarDatos($uuid, $nombre, $correo, $contrasegna, false);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");

@@ -1,6 +1,8 @@
 <?php
     use Models\Usuario;
     use Controllers\CrearUsuario;
+    use Respect\Validation\Validator;
+    use Respect\Validation\Exceptions\ValidationException;
 
     //CREAR un usuario mediante su nombre, correo y contrasegna
     //Metodo POST y todos los campos validados
@@ -11,11 +13,15 @@
 
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
+    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
+    //$contrasegna2 = isset($_POST['contrasegna2']) ? password_hash($_POST['contrasegna2'], PASSWORD_BCRYPT) : null;
     $esApi = isset($_POST['esApi']);
 
     header('Content-Type: application/json; charset=utf-8');
     try {
+        /*if ($contrasegna2 !== $contrasegna) {
+            throw new Exception("Contrasegnas no coinciden");
+        }password_verify(original, hash2)*/
         $usuario = new Usuario($nombre, $correo, $contrasegna);
         CrearUsuario::crear($usuario);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");

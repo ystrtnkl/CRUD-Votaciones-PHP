@@ -1,6 +1,7 @@
 
 <div class="container"> 
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"> 
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        
         <a href="/inicio" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> 
             <span class="fs-4">CRUD votaciones</span> 
         </a> 
@@ -30,6 +31,7 @@
                 <a href="/admin" class="nav-link" id="cabecera-admin">Administracion</a>
             </li>
         </ul> 
+        <p>soy: <?=$_SESSION['uuid'] ?? "nadie"?></p> 
     </header> 
 </div>
 <script>document.getElementById("cabecera-" + window.location.pathname.replace("/", "")).classList.add("active");</script>

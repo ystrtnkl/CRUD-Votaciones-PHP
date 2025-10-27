@@ -2,66 +2,42 @@ FROM php:8.3-apache
 
 RUN a2enmod rewrite
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-      procps \
-      nano \
-      git \
-      unzip \
-      git-core \
-      curl \
-      build-essential \
-      openssl \
-      libssl-dev \
-      libicu-dev \
-      zlib1g-dev \
-      libxml2 \
-      php-mongodb \
-      libxml2-dev \
-      libreadline-dev \
-      supervisor \
-      cron \
-      sudo \
-      libzip-dev \
-      && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-      && docker-php-ext-configure mysqli \
-      && docker-php-ext-configure intl \
-      && docker-php-ext-install \
-      pdo\
-      mysqli \
-      pdo_mysql \
-      sockets \
-      intl \
-      opcache \
-      zip \
-      && rm -rf /tmp/* \
-      && rm -rf /var/list/apt/* \
-      && rm -rf /var/lib/apt/lists/* \
-      && apt-get clean
+# Install build dependencies for PECL extensions
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    curl \
+    pkg-config \
+    libssl-dev \
+    libcurl4-openssl-dev \
+    libicu-dev \
+    libzip-dev \
+    libxml2-dev \
+    libreadline-dev \
+    zlib1g-dev \
+    build-essential \
+    autoconf \
+    m4 \
+    re2c \
+    procps \
+    nano \
+    supervisor \
+    cron \
+    sudo \
+ && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+ && docker-php-ext-configure intl \
+ && docker-php-ext-install pdo pdo_mysql mysqli intl opcache zip sockets
 
-# Instalación de NPM
-##RUN git clone https://github.com/nodejs/node.git \
-##&& cd node \
-## && ./configure \
-## && make \
-## && sudo make install
+# --- Install MongoDB driver via PECL ---
+RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
+ && pecl install mongodb \
+ && php -m | grep mongodb || (echo "❌ MongoDB extension not installed!" && exit 1)
 
-WORKDIR /var/www/html
-
-#RUN useradd ciclost && usermod -aG sudo ciclost
-#RUN useradd ${whoami} && usermod -aG sudo ${whoami}
-
-#RUN npm install -D tailwindcss
-## COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-## RUN install-php-extensions gd bcmath zip intl opcache
-
-# instalación de Composer
+# Install Composer
 COPY --from=composer:2.0 /usr/bin/composer /usr/local/bin/composer
 
-# instalación de phpDocumentor
-#COPY --from=phpdoc/phpdoc /opt/phpdoc/bin/phpdoc /usr/local/bin/phpdoc
+# Install Xdebug
+RUN pecl install xdebug \
+ && docker-php-ext-enable xdebug
 
-# instalación de XDebug
-RUN pecl install xdebug && docker-php-ext-enable xdebug
-
-# instalación de phpunit
-RUN composer global require phpunit/phpunit && ln -s /var/www/html/vendor/bin/phpunit /usr/local/bin/phpunit
+WORKDIR /var/www/html

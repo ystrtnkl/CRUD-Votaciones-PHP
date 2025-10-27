@@ -15,6 +15,7 @@
         "ramsey/uuid": "^4.9",
         "phroute/phroute": "^2.2",
         "nesbot/carbon": "^3.10",
-        "respect/validation": "^2.4"
+        "respect/validation": "^2.4",
+        "mongodb/mongodb": "^2.1"
     }
 }

@@ -13,13 +13,13 @@
                 <a href="/iniciarSesion" class="nav-link" id="cabecera-iniciarSesion">Iniciar sesion</a>
             </li> 
             <li class="nav-item">
-                <a href="registrarse" class="nav-link" id="cabecera-registrarse">Registrarse</a>
+                <a href="/registrarse" class="nav-link" id="cabecera-registrarse">Registrarse</a>
             </li> 
             <li class="nav-item">
                 <a href="<?=isset($_SESSION['uuid']) ? '/verUsuario?uuid=' . $_SESSION['uuid'] : '/iniciarSesion'?>" class="nav-link" id="cabecera-verUsuario">Ver mi usuario</a>
             </li> 
             <li class="nav-item">
-                <a href="/crearEncuesta" class="nav-link" id="cabecera-crearEncuesta">Crear encuesta</a>
+                <a href="<?=isset($_SESSION['uuid']) ? '/crearEncuesta' : '/iniciarSesion'?>" class="nav-link" id="cabecera-crearEncuesta">Crear encuesta</a>
             </li>  
             <li class="nav-item">
                 <a href="/informacion" class="nav-link" id="cabecera-informacion">Informacion</a>

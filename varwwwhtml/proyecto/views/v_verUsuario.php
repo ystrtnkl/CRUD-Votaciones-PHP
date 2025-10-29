@@ -34,7 +34,7 @@
     <p>requiere variable en url</p>
     <p>requiere tener cuenta</p>
 
-    <img src="<?=$urlFoto?>" alt="Foto de perfil">
+    <img src="<?=isset($urlFoto) && $urlFoto !== '' ? $urlFoto : 'http://localhost:8081/public/media/nofoto.png'?>" alt="Foto de perfil" class="foto-perfil">
     <h2>Nombre</h2>
     <p><?=$nombre?></p>
     <h2>Correo</h2>

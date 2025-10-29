@@ -37,3 +37,18 @@ button, input {
 .cajaError {
     text-align: left;
 }
+img.foto-perfil {
+    width: 128px;
+    height: 128px;
+}
+textarea {
+    min-width: 512px;
+}
+
+.caja-usuario {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.caja-admin {
+    background-color: gold;
+}

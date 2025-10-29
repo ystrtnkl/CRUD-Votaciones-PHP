@@ -2,6 +2,7 @@
     namespace Models;
     use Ramsey\Uuid\Uuid;
     use Respect\Validation\Validator;
+    use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
     use Models\Usuario;
     use Models\TipoPermisos;
@@ -19,26 +20,25 @@
         public function __construct($nombre, $usuario, $id = "", $contenido = "Nada", $permisos = [], $tipoPermisos = TipoPermisos::N, $foto = "", $fechaCreado = "") {
             try {
                 try {
-                    Validator::uuid()->check($id);
+                    Validaciones::vUuid($id);
                 } catch (ValidationException $e) {
                     $id = Uuid::uuid4()->toString();
                 }
                 //Validator::in(['b','n','w'])->check($tipoPermisos);
-                Validator::instance(TipoPermisos::class)->check($tipoPermisos);
-                Validator::arrayType()->each(Validator::stringType()->length(36,36))->check($permisos);
-                Validator::stringType()->length(null,127)->check($foto);
-                Validator::stringType()->notEmpty()->length(3, 127)->check($nombre);
-                Validator::stringType()->notEmpty()->length(1,4095)->check($contenido);
-                Validator::instance(Usuario::class)->check($usuario);
-                Validator::stringType()->length(36,36)->check($usuario->getUuid());
+                Validaciones::vTipoPermisos($tipoPermisos);
+                Validaciones::vPermisos($permisos);
+                Validaciones::vFotoEncuesta($foto);
+                Validaciones::vNombreEncuesta($nombre);
+                Validaciones::vContenidoEncuesta($contenido);
+                Validaciones::vEsUsuario($usuario);
+                Validaciones::vString36($usuario->getUuid());
                 try {
-                    Validator::stringType()->notEmpty()->check($fechaCreado);
+                    Validaciones::vFechaCreado($fechaCreado);
                 } catch (ValidationException $e) {
                     $fechaCreado = (string) time();
                 }
                 if (in_array($usuario->getUuid(), $permisos) && $tipoPermisos !== 'n') {
                     throw new \Exception("El creador no tiene relevancia en los permisos de su encuesta.");
-
                 }
                 
                 $this->id = $id;
@@ -89,7 +89,7 @@
 
         public function setPermisos($permisos) {
             try{
-                Validator::arrayType()->each(Validator::stringType()->length(36,36))->check($permisos);
+                Validaciones::vPermisos($permisos);
                 $this->permisos = $permisos;
                 return $this;
             } catch (ValidationException $e) {
@@ -100,7 +100,7 @@
         public function setTipoPermisos($tipoPermisos) {
             try{
                 //Validator::in(['b','n','w'])->check($tipoPermisos);
-                Validator::instance(TipoPermisos::class)->check($tipoPermisos);
+                Validaciones::vTipoPermisos($tipoPermisos);
                 $this->tipoPermisos = $tipoPermisos;
                 return $this;
             } catch (ValidationException $e) {

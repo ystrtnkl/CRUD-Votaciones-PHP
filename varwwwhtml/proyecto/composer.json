@@ -8,7 +8,8 @@
             "ystrtnkl\\CrudVotaciones\\": "./",
             "Models\\": "models/",
             "Controllers\\": "controllers/",
-            "Controllers\\Interfaces\\": "controllers/Interfaces/"
+            "Controllers\\Interfaces\\": "controllers/Interfaces/",
+            "Controllers\\Functions\\": "controllers/Functions"
         }
     },
     "require": {

@@ -2,6 +2,7 @@
     namespace Models;
     use Ramsey\Uuid\Uuid;
     use Respect\Validation\Validator;
+    use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
     include_once(DIR_FUNCTIONS . "c_generarContrasegna.php");
     //Objeto que representa un usuario
@@ -19,26 +20,26 @@
             try {
                 if ($urlFoto !== "") {
                     try {
-                        Validator::stringType()->notEmpty()->url()->check($urlFoto);
+                        Validaciones::vUrlFoto($urlFoto);
                     } catch (\Exception $e) {
                         $urlFoto = "";
                     }
                 }
                 try {
-                    Validator::uuid()->check($uuid);
+                    Validaciones::vUuid($uuid);
                 } catch (ValidationException $e) {
                     $uuid = Uuid::uuid4()->toString();
                 }
-                Validator::stringType()->notEmpty()->length(3, 63)->check($nombre);
-                Validator::email()->check($correo);
+                Validaciones::vNombreUsuario($nombre);
+                Validaciones::vCorreo($correo);
                 try {
-                    Validator::stringType()->notEmpty()->length(8, 128)->check($contrasegna);
+                    Validaciones::vContrasegna($contrasegna);
                 } catch (ValidationException $e) {
                     $contrasegna = generarContrasegna();
                 }
                 $contrasegna = (string) $contrasegna;
                 try {
-                    Validator::stringType()->notEmpty()->check($fechaCreado);
+                    Validaciones::vFechaCreado($fechaCreado);
                 } catch (ValidationException $e) {
                     $fechaCreado = (string) time();
                 }
@@ -86,7 +87,7 @@
 
         public function setNombre($nombre) {
             try {
-                Validator::stringType()->notEmpty()->length(3, 63)->check($nombre);
+                Validaciones::vNombreUsuario($nombre);
                 $this->nombre = $nombre;
                 return $this;
             } catch (ValidationException $e) {
@@ -96,7 +97,7 @@
         }
         public function setCorreo($correo) {
             try {
-                Validator::email()->check($correo);
+                Validaciones::vCorreo($correo);
                 $this->correo = $correo;
                 return $this;
             } catch (ValidationException $e) {
@@ -106,7 +107,7 @@
         }
         public function setContrasegna($contrasegna) {
             try {
-                Validator::stringType()->notEmpty()->length(8, 128)->check($contrasegna);
+                Validaciones::vContrasegna($contrasegna);
                 $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
                 return $this;
             } catch (ValidationException $e) {
@@ -117,7 +118,7 @@
 
         public function setUrlFoto($urlFoto) {
             try {
-                Validator::stringType()->notEmpty()->url()->check($urlFoto);
+                Validaciones::vUrlFoto($urlFoto);
                 $this->urlFoto = $urlFoto;
                 return $this;
             } catch (ValidationException $e) {

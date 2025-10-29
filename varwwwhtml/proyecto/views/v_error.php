@@ -16,7 +16,7 @@
     }
 ?>
 <main>
-    <h2>Error <?=$error?>, <?=$mensaje?></h2>
+    <h2>Error <?=$error ?? "Error desconocido"?>, <?=$mensaje ?? "Mensaje desconocido"?></h2>
     <a href="/inicio">Volver al inicio</a>
     <p>Mas informacion:</p>
     <div class="alert alert-danger cajaError" role="alert">

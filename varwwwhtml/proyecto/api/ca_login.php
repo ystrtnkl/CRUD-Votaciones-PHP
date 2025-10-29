@@ -16,7 +16,7 @@
     
     $esApi = isset($_POST['esApi']);
     
-    header('Content-Type: application/json; charset=utf-8');
+    //header('Content-Type: application/json; charset=utf-8');
     try {
         $usuario = LeerUsuario::iniciarSesion($correo, $contrasegna);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");

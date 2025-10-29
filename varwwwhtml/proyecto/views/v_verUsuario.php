@@ -22,7 +22,7 @@
     <h2>Eres Admin</h2>
     <p><?=$_SESSION['esAdmin'] === 's' ? "Sí" : "No"?></p>
     <h2>Fecha de creacion</h2>
-    <p><?=$_SESSION['fechaCreacion']?></p>
+    <p><?=date('d/m/y', (int)$_SESSION['fechaCreacion']) ?? "Desconocido"?></p>
     <?php if ($_SESSION['uuid'] === $_GET['uuid']) { ?>
     <h2>Eliminar</h2>
     <form action="/api/borrarUsuario" method="POST">

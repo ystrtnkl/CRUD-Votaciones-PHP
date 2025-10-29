@@ -1,7 +1,7 @@
 <?php
     use Models\Usuario;
     use Controllers\LeerUsuario;
-    use Respect\Validation\Validator;
+    use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
 
     //Login con un usuario mediante su correo y contrasegna
@@ -16,9 +16,14 @@
     
     $esApi = isset($_POST['esApi']);
     
-    //header('Content-Type: application/json; charset=utf-8');
+    header('Content-Type: application/json; charset=utf-8');
     try {
+        Validaciones::vCorreo($correo);
+        Validaciones::vContrasegna($contrasegna);
         $usuario = LeerUsuario::iniciarSesion($correo, $contrasegna);
+
+
+        $_SESSION['auto-correo'] = $correo;
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);

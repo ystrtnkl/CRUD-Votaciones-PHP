@@ -1,7 +1,7 @@
 <?php
     use Models\Usuario;
     use Controllers\CrearUsuario;
-    use Respect\Validation\Validator;
+    use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
 
     //CREAR un usuario mediante su nombre, correo y contrasegna
@@ -22,6 +22,18 @@
         /*if ($contrasegna2 !== $contrasegna) {
             throw new Exception("Contrasegnas no coinciden");
         }password_verify(original, hash2)*/
+        try {
+            Validaciones::vContrasegna($contrasegna);
+            Validaciones::vCorreo($correo);
+            Validaciones::vNombreUsuario($nombre);
+        } catch (\Exception $e) {
+            header('Location: /error?mensaje=El_nombre,_correo_o_contrasegna_son_invalidos', true, 303);
+            exit;
+        }
+        if ($_POST['contrasegna'] !== $_POST['contrasegna2']) {
+            header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
+            exit;
+        }
         $usuario = new Usuario($nombre, $correo, $contrasegna);
         CrearUsuario::crear($usuario);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
@@ -31,6 +43,8 @@
             'data' => (object)$usuario->jsonSerialize(),
             'message' => 'Usuario creado correctamente.'
             ];
+            $_SESSION['auto-nombre'] = $nombre;
+            $_SESSION['auto-correo'] = $correo;
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
         } else {
             header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);

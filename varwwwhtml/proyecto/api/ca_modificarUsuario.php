@@ -1,7 +1,7 @@
 <?php
     use Models\Usuario;
     use Controllers\ModificarUsuario;
-    use Respect\Validation\Validator;
+    use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
 
     //MODIFICAR un usuario mediante su uuid cambiando su posible nombre, correo, contrasegna
@@ -33,6 +33,24 @@
             throw new Exception("Contrasegnas nuevas no coinciden");
         }*/
         #$usuario = new Usuario($nombre, $correo, $contrasegna);
+        try {
+            Validaciones::vContrasegna($contrasegna);
+            if ($nuevaContrasegna !== "") Validaciones::vContrasegna($nuevaContrasegna);
+            if ($correo !== "") Validaciones::vCorreo($correo);
+            if ($nombre !== "") Validaciones::vNombreUsuario($nombre);
+            Validaciones::vUuid($uuid);
+        } catch (\Exception $e) {
+            header('Location: /error?mensaje=Alguno_de_los_campos_es_invalido', true, 303);
+            exit;
+        }
+        if ($_POST['contrasegna'] !== $_POST['contrasegna2']) {
+            header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
+            exit;
+        }
+        if ($_POST['nuevaContrasegna'] !== $_POST['nuevaContrasegna2']) {
+            header('Location: /error?mensaje=Las_nuevas_contrasegnas_no_son_iguales', true, 303);
+            exit;
+        }
         $usuario = ModificarUsuario::modificarDatos($uuid, $nombre, $correo, $contrasegna, false);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
@@ -41,6 +59,8 @@
             #'data' => (object)$usuario->jsonSerialize(),
             'message' => 'Usuario creado correctamente.'
             ];
+            $_SESSION['auto-nombre'] = $nombre;
+            $_SESSION['auto-correo'] = $correo;
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
         } else {
             header('Location: /verUsuario?uuid=' . $uuid, true, 303);

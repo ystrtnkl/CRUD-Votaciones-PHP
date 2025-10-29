@@ -8,9 +8,9 @@
     <p>Si ya tienes una sesión iniciada, se cerrara</p>
     <form action="api/crearUsuario" method="POST">
         <p>Nombre:</p> 
-        <input required type="text" name="nombre" id="nombre"><br>
+        <input required type="text" name="nombre" id="nombre" autofocus autocomplete="on" placeholder="<?=$_SESSION['auto-nombre'] ?? ''?>"><br>
         <p>Correo:</p> 
-        <input required type="email" name="correo" id="correo"><br>
+        <input required type="email" name="correo" id="correo" autocomplete="on" placeholder="<?=$_SESSION['auto-correo'] ?? ''?>"><br>
         <p>Contrasegna:</p> 
         <input required type="password" name="contrasegna" id="contrasegna"><br>
         <p>Repetir contraseña:</p> 

@@ -1,5 +1,5 @@
 <?php
-
+use Controllers\Functions\Validaciones;
 //Recibe un uuid y una foto, y la guarda, y asigna a ese usuario esa foto
 
 $metodoRequerido = "POST";

@@ -7,7 +7,7 @@
     <p>Si ya tienes una sesión iniciada, se cerrara</p>
     <form action="/api/iniciarSesion" method="POST">
         <p>Correo: </p>
-        <input required type="email" name="correo"><br>
+        <input required type="email" name="correo" autofocus autocomplete="on" placeholder="<?=$_SESSION['auto-correo'] ?? ''?>"><br>
         <p>Contrasegna: </p>
         <input required type="password" name="contrasegna"><br>
         <input class="btn btn-primary" type="submit" value="Iniciar sesión">

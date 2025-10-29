@@ -70,6 +70,11 @@
         include_once(DIR_VIEWS . "v_exito.php");
         include_once(DIR_PUBLIC . "html/end.html");
     });
+    $router->get('/error', function(){
+        include_once(DIR_PUBLIC . "html/head.html");  
+        include_once(DIR_VIEWS . "v_error.php");
+        include_once(DIR_PUBLIC . "html/end.html");
+    });
 
     $router->get('/extra', function(){
         include_once(DIR_PUBLIC . "html/head.html");  

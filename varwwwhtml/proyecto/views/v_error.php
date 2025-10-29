@@ -3,7 +3,7 @@
 <body>
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <?php 
-    $mensaje = "";
+    //$mensaje = "";
     if (isset($error)) {
         if ($error === 404) {
             $mensaje = "Ruta no encontrada";
@@ -12,11 +12,16 @@
             $mensaje = "Metodo HTTP no permitido";
         }
     } else {
-        $mensaje = "Error desconocido";
+        //$mensaje = "Error desconocido";
+        if (!isset($mensaje)) {
+            $mensaje = $_GET['mensaje'] ?? "";
+            $mensaje = str_replace("_", " ", $mensaje) . '.';
+        }
     }
 ?>
 <main>
-    <h2>Error <?=$error ?? "Error desconocido"?>, <?=$mensaje ?? "Mensaje desconocido"?></h2>
+    <h2>Error <?=$error ?? ""?></h2>
+    <p><?=$mensaje ?? "Mensaje desconocido"?></p>
     <a href="/inicio">Volver al inicio</a>
     <p>Mas informacion:</p>
     <div class="alert alert-danger cajaError" role="alert">

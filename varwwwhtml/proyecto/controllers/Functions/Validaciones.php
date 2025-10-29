@@ -48,7 +48,7 @@ class Validaciones {
         Validator::email()->check($dato);
     }
     public static function vContrasegna($dato) {
-        Validator::stringType()->notEmpty()->length(8, 128)->check($dato);
+        Validator::stringType()->notEmpty()->length(8, 4094)->check($dato);
     }
     public static function vString36($dato) {
         Validator::stringType()->length(36,36)->check($dato);

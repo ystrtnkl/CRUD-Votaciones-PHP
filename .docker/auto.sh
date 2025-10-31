@@ -1,5 +1,9 @@
 #!/bin/bash
 #cd ..
+mkdir ./varwwwhtml/proyecto/files/
+mkdir ./varwwwhtml/proyecto/public/files/portadasEncuestas/
+mkdir ./varwwwhtml/proyecto/public/files/fotosPerfil/
+#sh ../eliminarFotos.sh
 docker compose down
 docker compose up -d
 firefox http://localhost:8081/inicio &

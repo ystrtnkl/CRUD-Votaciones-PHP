@@ -67,7 +67,9 @@
     <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
         Nueva foto: <input type="file" required name="foto" accept=".jpg,.jpeg,.png,.gif"><br>
         <input type="hidden" name="esParaPerfil" value="s">
+        <input type="hidden" name="btnSubir" value="Subir">
         <input type="hidden" name="uuid" value="<?=$uuid?>">
+        <input type="hidden" name="redirigir" value="s">
         <input type="submit" value="Editar foto">
     </form>
     <h2>Encuestas del usuario</h2>

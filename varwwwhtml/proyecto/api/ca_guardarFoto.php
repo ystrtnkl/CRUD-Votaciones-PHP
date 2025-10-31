@@ -20,7 +20,7 @@ if (isset($_POST['btnSubir']) && $_POST['btnSubir'] == 'Subir' && isset($_POST["
             $extension = ".gif";
         } else {
             //header("HTTP/1.1 400 Bad Request");
-            header('Location: /404', true, 301);
+            header('Location: /error', true, 301);
             exit();
         }
         
@@ -33,20 +33,29 @@ if (isset($_POST['btnSubir']) && $_POST['btnSubir'] == 'Subir' && isset($_POST["
         $final = $ruta . "pfp-" . $usuario . "-" . time() . $extension;
         if (file_exists($final)) {
             //header("HTTP/1.1 400 Bad Request");
-            header('Location: /404', true, 301);
+            header('Location: /error', true, 301);
             exit();
         }
         move_uploaded_file($_FILES['foto']['tmp_name'], $final);
 
-        // CAMBIAR, NO DEVOLVER ESTO (modificar usuario para qeu tenga la url)
-        echo "<p>Archivo $nombre subido con éxito</p><img src='/" . $final . "' alt='foto subida' width='200px'><p>" . $final . "</p>";
+        if (isset($_POST['esApi'])) {
+            $response = (object)[
+                'success' => true,
+                'message' => 'Usuario creado correctamente.'
+            ];
+            echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        } else if (isset($_POST['redirigir'])) {
+            header('Location: /verUsuario?uuid=' . $_POST["uuid"], true, 301);
+        } else {
+            echo "<p>Archivo $nombre subido con éxito</p><img src='/" . $final . "' alt='foto subida' width='200px'><p>" . $final . "</p>";
+        }
     } else {
         //header("HTTP/1.1 400 Bad Request");
-        header('Location: /404', true, 301);
+        header('Location: /error', true, 301);
         exit();
     }
 } else {
     //header("HTTP/1.1 400 Bad Request");
-    header('Location: /404', true, 301);
+    header('Location: /error', true, 301);
     exit();
 }

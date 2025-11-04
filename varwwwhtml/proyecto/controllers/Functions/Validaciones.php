@@ -9,7 +9,8 @@ use Models\Respuesta;
 class Validaciones {
     //Funcion para validar cada campo, y si hay un fallo suelta un error ValidationException
     public static function vUuid($dato) {
-        Validator::uuid()->check($dato);
+        //Validator::uuid()->check($dato);
+        Validator::stringType()->length(36,36)->check($dato);
     }
     public static function vTipoPermisos($dato) {
         Validator::instance(TipoPermisos::class)->check($dato);

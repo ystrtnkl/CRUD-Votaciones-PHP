@@ -5,14 +5,15 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Crear;
-    use Controllers\EjecutarConsulta;
+    use \PDO;
+    use Controllers\UtilidadesDB;
     class CrearEncuesta implements Crear {
-        public static function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna
             return true;
         }
 
-        public static function crear($encuesta) {
+        public static function crear(PDO $conexion, $encuesta) {
             //crea la encuesta con el usuario como duegno
             return $encuesta;
         }

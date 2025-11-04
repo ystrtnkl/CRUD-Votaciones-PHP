@@ -5,14 +5,15 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Modificar;
-    use Controllers\EjecutarConsulta;
+    use \PDO;
+    use Controllers\UtilidadesDB;
     class ModificarEncuesta implements Modificar {
-        public static function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public static function modificar($id, $encuestaNueva): bool {
+        public static function modificar(PDO $conexion, $id, $encuestaNueva): bool {
             //modifica datos basicos de la encuesta
             return true;
         }

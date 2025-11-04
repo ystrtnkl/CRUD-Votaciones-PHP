@@ -5,14 +5,14 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Borrar;
-    use Controllers\EjecutarConsulta;
+    use \PDO;
     class BorrarEncuesta implements Borrar {
-        public static function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public static function borrar($uuid, $contrasegna): bool {
+        public static function borrar(PDO $conexion, $uuid, $contrasegna): bool {
             //borrar la encuesta y sus respuestas asociadas
             return true;
         }

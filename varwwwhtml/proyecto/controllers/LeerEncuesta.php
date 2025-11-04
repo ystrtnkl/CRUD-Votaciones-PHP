@@ -5,19 +5,20 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Leer;
-    use Controllers\EjecutarConsulta;
+    use \PDO;
+    use Controllers\UtilidadesDB;
     class LeerEncuesta implements Leer {
-        public static function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, y es admin o duegno del objeto
             return true;
         }
 
-        public static function leer($id) {
+        public static function leer(PDO $conexion, $id) {
             //los datos de la encuesta con ese id y sus respuestas
             return $id;
         }
     
-        public static function leerTodos(): array {
+        public static function leerTodos(PDO $conexion): array {
             //igual que leer pero con todos, solo si es admin
             return [];
         }

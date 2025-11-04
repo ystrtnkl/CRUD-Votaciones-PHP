@@ -5,19 +5,20 @@
     use Models\Usuario;
     use Models\Respuesta;
     use Controllers\Interfaces\Modificar;
-    use Controllers\EjecutarConsulta;
+    use \PDO;
+    use Controllers\UtilidadesDB;
     class ModificarUsuario implements Modificar {
-        public static function autorizarAccion($usuario, $contrasegna): bool {
+        public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
             return true;
         }
 
-        public static function modificar($uuid, $usuarioNuevo) {
+        public static function modificar(PDO $conexion, $uuid, $usuarioNuevo) {
             //modifica datos basicos del usuario, y comprobar que la imagen este guardada
             return true;
         }
         
-        public static function modificarDatos($uuid, $nombre, $correo, $contrasegna, $urlFoto) {
+        public static function modificarDatos(PDO $conexion, $uuid, $nombre, $correo, $contrasegna, $urlFoto) {
             //modifica solo los datos presentes
             $nombre = "hola"; $correo = "hola@hola.com"; $contrasegna = "a9sd8f793";
             return new Usuario($nombre, $correo, $contrasegna, $uuid);

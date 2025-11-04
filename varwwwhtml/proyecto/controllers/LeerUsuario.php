@@ -27,10 +27,21 @@
         }
 
         public static function iniciarSesion(PDO $conexion, $correo, $contrasegna) {
-            //decodificar contrasegna y comparar
-
-            
-            return new Usuario("hola", $correo, $contrasegna, );
+            try {
+                $preparada = $conexion->prepare(UtilidadesDB::$getUsuarioPorCorreo);
+                $preparada->bindValue('correo',$correo);
+                $preparada->execute();
+                $resultado = $preparada->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
+                if ($resultado === null) {
+                    return null;
+                }
+                if (password_verify($contrasegna, $resultado['contrasegna']) ) {
+                    return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null);
+                }
+                return null;
+            } catch (Exception $e) {
+                return null;
+            }
         }
     
         public static function leerTodos(PDO $conexion): array {

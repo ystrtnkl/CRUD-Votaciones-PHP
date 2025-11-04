@@ -1,5 +1,5 @@
 INSERT INTO USUARIO (uuid, nombre, correo, contrasegna, esAdmin, fotoUrl, fechaCreado) VALUES
-('11111111-1111-1111-1111-111111111111', 'Alice', 'usr1@gma.com',  'hash_pw1...AAA', 'n', 'https://picsum.photos/id/1011/200', '1762273040'),
+('11111111-1111-1111-1111-111111111111', 'Alice', 'usr1@gma.com',  '123456789.A', 'n', 'https://picsum.photos/id/1011/200', '1762273040'),
 ('22222222-2222-2222-2222-222222222222', 'Bob', 'usr2@gma.com',    'hash_pw2...AAA', 'n', 'https://picsum.photos/id/1012/200', '1762273040'),
 ('33333333-3333-3333-3333-333333333333', 'Charlie', 'usr3@gma.com', 'hash_pw3...AAA', 'n', 'https://picsum.photos/id/1013/200', '1762273040'),
 ('44444444-4444-4444-4444-444444444444', 'Diana', 'usr4@gma.com',  'hash_pw4...AAA', 's', 'https://picsum.photos/id/1014/200', '1762273040'),

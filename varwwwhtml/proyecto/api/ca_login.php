@@ -3,6 +3,7 @@
     use Controllers\LeerUsuario;
     use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
+    use Controllers\UtilidadesDB;
 
     //Login con un usuario mediante su correo y contrasegna
     //Metodo GET y todos los campos validados
@@ -16,12 +17,12 @@
     
     $esApi = isset($_POST['esApi']);
     
-    header('Content-Type: application/json; charset=utf-8');
+    //header('Content-Type: application/json; charset=utf-8');
     try {
         Validaciones::vCorreo($correo);
         Validaciones::vContrasegna($contrasegna);
-        $usuario = LeerUsuario::iniciarSesion($correo, $contrasegna);
-
+        $usuario = LeerUsuario::iniciarSesion(UtilidadesDB::getConexion(), $correo, $contrasegna);
+        echo $usuario['nombre'] ?? "no b";
 
         $_SESSION['auto-correo'] = $correo;
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");

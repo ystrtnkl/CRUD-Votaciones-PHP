@@ -13,23 +13,26 @@
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
+    $contrasegna = isset($_POST['contrasegna']) ? /*password_hash(*/$_POST['contrasegna']/*, PASSWORD_BCRYPT)*/ : null;
     
     $esApi = isset($_POST['esApi']);
     
-    //header('Content-Type: application/json; charset=utf-8');
+    
     try {
         Validaciones::vCorreo($correo);
         Validaciones::vContrasegna($contrasegna);
         $usuario = LeerUsuario::iniciarSesion(UtilidadesDB::getConexion(), $correo, $contrasegna);
-        echo $usuario['nombre'] ?? "no b";
-
         $_SESSION['auto-correo'] = $correo;
-        include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
-        if ($esApi) {
-            echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+        if ($usuario === null) {
+            include_once(DIR_FUNCTIONS . "c_error400Json.php");
         } else {
-            header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);
+            include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
+            if ($esApi) {
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
+            } else {
+                header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);
+            }
         }
     } catch (\Exception $e) {
         include_once(DIR_FUNCTIONS . "c_error400Json.php");

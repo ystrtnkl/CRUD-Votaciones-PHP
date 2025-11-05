@@ -35,8 +35,8 @@
                 if ($resultado === null) {
                     return null;
                 }
-                if (password_verify($contrasegna, $resultado['contrasegna']) ) {
-                    return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null);
+                if (password_verify($contrasegna, $resultado['contrasegna'])) {
+                    return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null, $resultado['esAdmin'] ?? 'n', $resultado['fotoUrl'] ?? "");
                 }
                 return null;
             } catch (Exception $e) {

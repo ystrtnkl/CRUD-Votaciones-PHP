@@ -16,7 +16,7 @@
                 <a href="/registrarse" class="nav-link" id="cabecera-registrarse">Registrarse</a>
             </li> 
             <li class="nav-item">
-                <a href="<?=isset($_SESSION['uuid']) ? '/verUsuario?uuid=' . $_SESSION['uuid'] : '/iniciarSesion'?>" class="nav-link" id="cabecera-verUsuario">Ver mi usuario</a>
+                <a href="<?=isset($_SESSION['uuid']) ? '/verUsuario?uuid=' . $_SESSION['uuid'] : '/iniciarSesion'?>" class="nav-link" id="cabecera-verUsuario">Ver usuario</a>
             </li> 
             <li class="nav-item">
                 <a href="<?=isset($_SESSION['uuid']) ? '/crearEncuesta' : '/iniciarSesion'?>" class="nav-link" id="cabecera-crearEncuesta">Crear encuesta</a>

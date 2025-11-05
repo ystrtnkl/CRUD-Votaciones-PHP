@@ -12,7 +12,10 @@ if (isset($_POST['esApi']) || isset($_GET['esApi']) || isset($_PUT['esApi']) || 
     echo json_encode($response, JSON_UNESCAPED_UNICODE);
     exit;
 } else {
-    header('Location: /404', true, 303);
+    //echo "<script>window.location.pathname = 'error?mensaje=Error_en_los_datos_introducidos'</script>";
+    
+    header('Location: /error?mensaje=Error_en_los_datos_introducidos', true, 303);
+    exit;
 }
 
 ?>

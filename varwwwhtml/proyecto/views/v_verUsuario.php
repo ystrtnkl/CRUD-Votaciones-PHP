@@ -1,4 +1,8 @@
-
+<?php 
+    use Models\Usuario;
+    use Controllers\LeerUsuario;
+    use Controllers\UtilidadesDB;
+?>
 <title>Ver usuario</title>
 </head>
 <body>
@@ -7,9 +11,11 @@
     <h2>Ver usuario</h2>
     <!-- CERRAR SESION Y LOGOUT SOLO SI NO ES EL DUEGNO -->
     
-    <?php if ($_SESSION['uuid'] ?? "" === $_GET['uuid']) { ?>
-    <a href="/api/cerrarSesion">Cerrar sesion</a> <p><?=$_SESSION['uuid']?></p>
-    <?php
+    <?php 
+    if ($_SESSION['uuid'] ?? "a" === $_GET['uuid'] ?? "b") { 
+        //PORQUE SON IGUALEEEEEEEEEEEEEEEEEEEEEEEES
+        var_dump($_SESSION['uuid'] ?? "a");
+        var_dump($_GET['uuid'] ?? "b");
         $uuid = $_SESSION['uuid'];
         $nombre = $_SESSION['nombre'];
         $correo = $_SESSION['correo'];
@@ -18,23 +24,28 @@
         $contrasegna = $_SESSION['contrasegna'];
         $urlFoto = $_SESSION['urlFoto'];
     ?>
+    <a href="/api/cerrarSesion">Cerrar sesion</a> <p><?=$_SESSION['uuid']?></p>
     <?php } else { ?>
     <?php
+    echo "buscar";
         //ENCONTRAR EN BASE DE DATOS
-        $uuid = "db";
-        $nombre = "db";
-        $correo = "db";
-        $esAdmin = "db";
-        $fechaCreacion = "db";
-        $contrasegna = "db";
-        $urlFoto = "db";
+        $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $uuid);
+        if ($usuario === null) {
+            header('Location: /error?mensaje=Error_en_la_base_de_datos', true, 303);
+            exit;
+        } else {
+            $uuid = $usuario->getUuid();
+            $nombre = $usuario->getNombre();
+            $correo = $usuario->getCorreo();
+            $esAdmin = '?';
+            $fechaCreacion = $usuario->getFechaCreado();
+            $contrasegna = "?";
+            $urlFoto = $usuario->getUrlFoto();
+        } 
     ?>
-    <?php } ?>
-    
-    <p>requiere variable en url</p>
-    <p>requiere tener cuenta</p>
+    <?php }?>
 
-    <img src="<?=isset($urlFoto) && $urlFoto !== '' ? $urlFoto : 'http://localhost:8081/public/media/nofoto.png'?>" alt="Foto de perfil" class="foto-perfil">
+    <img src="<?=$urlFoto ?? 'http://localhost:8081/public/media/nofoto.png'?>" alt="Foto de perfil" class="foto-perfil">
     <h2>Nombre</h2>
     <p><?=$nombre?></p>
     <h2>Correo</h2>

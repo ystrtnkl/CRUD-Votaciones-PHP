@@ -21,8 +21,10 @@
 ?>
 <main>
     <h2>Error <?=$error ?? ""?></h2>
-    <p><?=$mensaje ?? "Mensaje desconocido"?></p>
-    <a href="/inicio">Volver al inicio</a>
+    <h3><?=$mensaje ?? "Mensaje desconocido"?></h3>
+    <a href="/inicio">Volver al inicio</a><br>
+    <button onclick="window.history.back()">Ir atras</button>
+    <?php if (!isset($e) || $e === null) { ?>
     <p>Mas informacion:</p>
     <div class="alert alert-danger cajaError" role="alert">
         <?php
@@ -31,6 +33,7 @@
             }
         ?>
     </div>
+    <?php } ?>
     <br><br><br>
 </main>
 <?php include(DIR_VIEWS . "template/vt_footer.php") ?>

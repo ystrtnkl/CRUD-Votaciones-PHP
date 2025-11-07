@@ -9,13 +9,9 @@
 <?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
 <main>
     <h2>Ver usuario</h2>
-    <!-- CERRAR SESION Y LOGOUT SOLO SI NO ES EL DUEGNO -->
     
     <?php 
-    if ($_SESSION['uuid'] ?? "a" === $_GET['uuid'] ?? "b") { 
-        //PORQUE SON IGUALEEEEEEEEEEEEEEEEEEEEEEEES
-        var_dump($_SESSION['uuid'] ?? "a");
-        var_dump($_GET['uuid'] ?? "b");
+    if ($_SESSION['uuid'] === $_GET['uuid'] && isset($_SESSION['uuid'])) { 
         $uuid = $_SESSION['uuid'];
         $nombre = $_SESSION['nombre'];
         $correo = $_SESSION['correo'];
@@ -27,11 +23,9 @@
     <a href="/api/cerrarSesion">Cerrar sesion</a> <p><?=$_SESSION['uuid']?></p>
     <?php } else { ?>
     <?php
-    echo "buscar";
-        //ENCONTRAR EN BASE DE DATOS
-        $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $uuid);
+        $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $_GET['uuid']);
         if ($usuario === null) {
-            header('Location: /error?mensaje=Error_en_la_base_de_datos', true, 303);
+            header('Location: /error?mensaje=Usuario_no_encontrado', true, 303);
             exit;
         } else {
             $uuid = $usuario->getUuid();
@@ -40,10 +34,10 @@
             $esAdmin = '?';
             $fechaCreacion = $usuario->getFechaCreado();
             $contrasegna = "?";
-            $urlFoto = $usuario->getUrlFoto();
-        } 
+            $urlFoto = $usuario->getUrlFoto() ?? '#';
+        }
     ?>
-    <?php }?>
+    <?php } ?>
 
     <img src="<?=$urlFoto ?? 'http://localhost:8081/public/media/nofoto.png'?>" alt="Foto de perfil" class="foto-perfil">
     <h2>Nombre</h2>

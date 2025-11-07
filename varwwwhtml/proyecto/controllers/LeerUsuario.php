@@ -20,7 +20,8 @@
                 $preparada->bindValue('uuid',$uuid);
                 $preparada->execute();
                 $resultado = $preparada->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
-                return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null);
+                var_dump($resultado);
+                return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null, $resultado["esAdmin"], $resultado["urlFoto"]);
             } catch (Exception $e) {
                 return null;
             }
@@ -36,7 +37,9 @@
                     return null;
                 }
                 if (password_verify($contrasegna, $resultado['contrasegna'])) {
-                    return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null, $resultado['esAdmin'] ?? 'n', $resultado['fotoUrl'] ?? "");
+                    //$nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n', $urlFoto = ""
+                    //return new Usuario($resultado['nombre'], $resultado['correo'], $resultado['contrasegna'], $resultado['uuid'], $resultado['fechaCreado'], $resultado['esAdmin'], $resultado['urlFoto']);
+                    return new Usuario(nombre: $resultado['nombre'] ?? null,  correo: $resultado['correo'] ?? null, contrasegna: $resultado['contrasegna'] ?? null, uuid: $resultado['uuid'] ?? null, fechaCreado: $resultado['fechaCreado'] ?? null, esAdmin:$resultado['esAdmin'] ?? 'n', urlFoto:$resultado['urlFoto']);
                 }
                 return null;
             } catch (Exception $e) {

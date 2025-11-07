@@ -9,7 +9,7 @@ CREATE TABLE USUARIO (
     contrasegna VARCHAR(128) NOT NULL,
     fechaCreado VARCHAR(12) DEFAULT CURRENT_TIMESTAMP, -- registrada aqui o en php
     esAdmin CHAR(1), -- inmodificable
-    fotoUrl VARCHAR(255), 
+    urlFoto VARCHAR(255), 
     CONSTRAINT chk_esAdmin CHECK (esAdmin IN ('s','n'))
 ) ENGINE=InnoDB;
 

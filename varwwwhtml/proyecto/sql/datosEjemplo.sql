@@ -1,9 +1,15 @@
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE RESPUESTA;
+TRUNCATE TABLE ENCUESTA;
+TRUNCATE TABLE USUARIO;
+SET FOREIGN_KEY_CHECKS = 1;
+
 -- Contrasegna de usuario de ejemplo (hash): 123456789.A
-INSERT INTO USUARIO (uuid, nombre, correo, contrasegna, esAdmin, fotoUrl, fechaCreado) VALUES
+INSERT INTO USUARIO (uuid, nombre, correo, contrasegna, esAdmin, urlFoto, fechaCreado) VALUES
 ('11111111-1111-1111-1111-111111111111', 'Alice', 'usr1@gma.com',  '$2y$10$ZKdCZowfgt21Ve9k.kAbeOgMbsRvFzeE852ifKkt65StzFJVXWJ1i', 'n', 'https://picsum.photos/id/1011/200', '1762273040'),
 ('22222222-2222-2222-2222-222222222222', 'Bob', 'usr2@gma.com',    'hash_pw2...AAA', 'n', 'https://picsum.photos/id/1012/200', '1762273040'),
 ('33333333-3333-3333-3333-333333333333', 'Charlie', 'usr3@gma.com', 'hash_pw3...AAA', 'n', 'https://picsum.photos/id/1013/200', '1762273040'),
-('44444444-4444-4444-4444-444444444444', 'Diana', 'usr4@gma.com',  'hash_pw4...AAA', 's', 'https://picsum.photos/id/1014/200', '1762273040'),
+('44444444-4444-4444-4444-444444444444', 'Diana', 'usr4@gma.com',  '$2y$10$ZKdCZowfgt21Ve9k.kAbeOgMbsRvFzeE852ifKkt65StzFJVXWJ1i', 's', 'https://picsum.photos/id/1014/200', '1762273040'),
 ('55555555-5555-5555-5555-555555555555', 'Eve', 'usr5@gma.com',    'hash_pw5...AAA', 'n', 'https://picsum.photos/id/1015/200', '1762273040'),
 ('66666666-6666-6666-6666-666666666666', 'Frank', 'usr6@gma.com',  'hash_pw6...AAA', 'n', 'https://picsum.photos/id/1016/200', '1762273040'),
 ('77777777-7777-7777-7777-777777777777', 'Grace', 'usr7@gma.com',  'hash_pw7...AAA', 'n', 'https://picsum.photos/id/1017/200', '1762273040'),

@@ -10,7 +10,7 @@ class UtilidadesDB {
     public static $getUsuarioPorUuid = "SELECT * FROM USUARIO WHERE uuid = :uuid;";
     public static $borrarUsuarioPorUuid = "DELETE FROM USUARIO WHERE uuid = :uuid;";
     public static $actualizarUsuarioPorUuid = "UPDATE USUARIO SET nombre = :nombre, correo = :correo, contrasegna = :contrasegna WHERE uuid = :uuid;";
-    public static $actualizarUsuarioFotoPorUuid = "UPDATE USUARIO SET fotoUrl = :fotoUrl WHERE uuid = :uuid;";
+    public static $actualizarUsuarioFotoPorUuid = "UPDATE USUARIO SET urlFoto = :urlFoto WHERE uuid = :uuid;";
     public static $getUsuarioPorCorreo = "SELECT * FROM USUARIO WHERE correo = :correo;";
 
     //Devuelve una conexion PDO a MariaDB

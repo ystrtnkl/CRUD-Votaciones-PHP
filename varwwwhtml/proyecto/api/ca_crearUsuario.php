@@ -2,6 +2,7 @@
     use Models\Usuario;
     use Controllers\CrearUsuario;
     use Controllers\Functions\Validaciones;
+    use Controllers\UtilidadesDB;
     use Respect\Validation\Exceptions\ValidationException;
 
     //CREAR un usuario mediante su nombre, correo y contrasegna
@@ -14,28 +15,34 @@
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
     $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
-    //$contrasegna2 = isset($_POST['contrasegna2']) ? password_hash($_POST['contrasegna2'], PASSWORD_BCRYPT) : null;
+    $contrasegna2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
     $esApi = isset($_POST['esApi']);
 
-    header('Content-Type: application/json; charset=utf-8');
+    //header('Content-Type: application/json; charset=utf-8');
     try {
-        /*if ($contrasegna2 !== $contrasegna) {
-            throw new Exception("Contrasegnas no coinciden");
-        }password_verify(original, hash2)*/
         try {
+            /*if (password_verify($contrasegna2, $contrasegna)) {
+                throw new Exception("Contrasegnas no coinciden");
+            }*/
             Validaciones::vContrasegna($contrasegna);
             Validaciones::vCorreo($correo);
             Validaciones::vNombreUsuario($nombre);
         } catch (\Exception $e) {
+            $mensaje = "Uno de los datos introducidos es invalido";
             header('Location: /error?mensaje=El_nombre,_correo_o_contrasegna_son_invalidos', true, 303);
             exit;
         }
-        if ($_POST['contrasegna'] !== $_POST['contrasegna2']) {
+        if (!password_verify($contrasegna2, $contrasegna)) {
+            $mensaje = "Las dos contrasegnas tienen que ser iguales";
             header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
             exit;
         }
         $usuario = new Usuario($nombre, $correo, $contrasegna);
-        CrearUsuario::crear($usuario);
+        if (CrearUsuario::crear(UtilidadesDB::getConexion(), $usuario) === null) {
+            throw new Exception("Error en los datos");
+        }
+        $_SESSION['auto-nombre'] = $nombre;
+        $_SESSION['auto-correo'] = $correo;
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             $response = (object)[
@@ -43,14 +50,14 @@
             'data' => (object)$usuario->jsonSerialize(),
             'message' => 'Usuario creado correctamente.'
             ];
-            $_SESSION['auto-nombre'] = $nombre;
-            $_SESSION['auto-correo'] = $correo;
+            
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
         } else {
             header('Location: /verUsuario?uuid=' . $usuario->getUuid(), true, 303);
         }
     } catch (\Exception $e) {
-        include_once(DIR_FUNCTIONS . "c_error400Json.php");
+        $mensaje = "Ha habido un error en los campos";
+        header('Location: /error?mensaje=Error_en_los_datos', true, 303);
     }
 
 ?>

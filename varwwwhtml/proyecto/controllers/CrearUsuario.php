@@ -14,8 +14,21 @@
         }
 
         public static function crear(PDO $conexion, $usuario) {
-            //crea el usuario si es valido
-            return $usuario;
+            try {
+                $preparada = $conexion->prepare(UtilidadesDB::$crearUsuario);
+                $preparada->bindValue('uuid',$usuario->getUuid());
+                $preparada->bindValue('nombre',$usuario->getNombre());
+                $preparada->bindValue('correo',$usuario->getCorreo());
+                $preparada->bindValue('contrasegna',$usuario->getContrasegna());
+                $preparada->bindValue('fechaCreado', (string) time());
+                $preparada->bindValue('urlFoto', '');
+                if ($preparada->execute()) {
+                    return $usuario->getUuid();
+                }
+                return null;
+            } catch (Exception $e) {
+                return null;
+            }
         }
     
 

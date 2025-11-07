@@ -25,6 +25,7 @@
     <?php
         $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $_GET['uuid']);
         if ($usuario === null) {
+            $mensaje = "No se ha encontrado el usuario especificado";
             header('Location: /error?mensaje=Usuario_no_encontrado', true, 303);
             exit;
         } else {
@@ -36,7 +37,6 @@
             $contrasegna = "?";
             $urlFoto = $usuario->getUrlFoto() ?? '#';
         }
-        var_dump($usuario);
     ?>
     <?php } ?>
 
@@ -46,7 +46,13 @@
     <h2>Correo</h2>
     <p><?=$correo?></p>
     <h2>Eres Admin</h2>
-    <p><?=$esAdmin === 's' ? "Sí" : "No"?>
+    <p>
+    <?php 
+    echo $esAdmin === 's' ? "Sí" : "No";
+    if ($esAdmin === 's' && $_SESSION['uuid'] === $_GET['uuid'] && isset($_SESSION['uuid'])) { ?>
+        <br><a href="/admin">Panel de administracion</a>
+    <?php } ?>
+    </p>
     <h2>Fecha de creacion</h2>
     <p><?=date('d/m/y', (int)$fechaCreacion) ?? "Desconocido"?></p>
     <?php if ($uuid === $_GET['uuid']) { ?>

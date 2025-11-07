@@ -17,7 +17,8 @@
         $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $uuid);
         echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
     } catch (\Exception $e) {
-        header('Location: /error?mensaje=Error_en_la_base_de_datos', true, 303);
+        $mensaje = "El usuario no existe";
+        header('Location: /error?mensaje=Usuario_no_existe', true, 303);
         exit;
     }
 

@@ -40,14 +40,17 @@
             if ($nombre !== "") Validaciones::vNombreUsuario($nombre);
             Validaciones::vUuid($uuid);
         } catch (\Exception $e) {
+            $mensaje = "Uno de los campos es invalido";
             header('Location: /error?mensaje=Alguno_de_los_campos_es_invalido', true, 303);
             exit;
         }
         if ($_POST['contrasegna'] !== $_POST['contrasegna2']) {
+            $mensaje = "Las contrasegnas no coinciden";
             header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
             exit;
         }
         if ($_POST['nuevaContrasegna'] !== $_POST['nuevaContrasegna2']) {
+            $mensaje = "Las contrasegnas no coinciden";
             header('Location: /error?mensaje=Las_nuevas_contrasegnas_no_son_iguales', true, 303);
             exit;
         }

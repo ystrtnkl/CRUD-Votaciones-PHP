@@ -25,7 +25,7 @@
     <a href="/inicio">Volver al inicio</a><br>
     <button onclick="window.history.back()">Ir atras</button>
     <?php if (!isset($e) || $e === null) { ?>
-    <p>Mas informacion:</p>
+    <p>Mas informacion: <?=$descripcion??''?></p>
     <div class="alert alert-danger cajaError" role="alert">
         <?php
             if (isset($e)) {

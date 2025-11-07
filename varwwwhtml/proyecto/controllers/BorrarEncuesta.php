@@ -6,6 +6,7 @@
     use Models\Respuesta;
     use Controllers\Interfaces\Borrar;
     use \PDO;
+    use Controllers\UtilidadesDB;
     class BorrarEncuesta implements Borrar {
         public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto

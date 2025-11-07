@@ -31,11 +31,12 @@
             $uuid = $usuario->getUuid();
             $nombre = $usuario->getNombre();
             $correo = $usuario->getCorreo();
-            $esAdmin = '?';
+            $esAdmin = $usuario->getEsAdmin();
             $fechaCreacion = $usuario->getFechaCreado();
             $contrasegna = "?";
             $urlFoto = $usuario->getUrlFoto() ?? '#';
         }
+        var_dump($usuario);
     ?>
     <?php } ?>
 
@@ -45,7 +46,7 @@
     <h2>Correo</h2>
     <p><?=$correo?></p>
     <h2>Eres Admin</h2>
-    <p><?=$esAdmin === 's' ? "Sí" : "No"?></p>
+    <p><?=$esAdmin === 's' ? "Sí" : "No"?>
     <h2>Fecha de creacion</h2>
     <p><?=date('d/m/y', (int)$fechaCreacion) ?? "Desconocido"?></p>
     <?php if ($uuid === $_GET['uuid']) { ?>

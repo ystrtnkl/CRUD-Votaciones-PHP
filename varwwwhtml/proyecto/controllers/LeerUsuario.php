@@ -20,7 +20,6 @@
                 $preparada->bindValue('uuid',$uuid);
                 $preparada->execute();
                 $resultado = $preparada->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
-                var_dump($resultado);
                 return new Usuario($resultado['nombre'] ?? null,  $resultado['correo'] ?? null, $resultado['contrasegna'] ?? null, $resultado['uuid'] ?? null, $resultado['fechaCreado'] ?? null, $resultado["esAdmin"], $resultado["urlFoto"]);
             } catch (Exception $e) {
                 return null;

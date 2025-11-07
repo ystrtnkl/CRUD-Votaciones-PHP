@@ -17,8 +17,6 @@
         private $urlFoto; //La url de su foto de perfil
 
         public function __construct($nombre, $correo, $contrasegna = "", $uuid = "", $fechaCreado = "", $esAdmin = 'n', $urlFoto = "") {
-            var_dump($esAdmin);
-            var_dump($fechaCreado);
             try {
                 if ($urlFoto !== "") {
                     try {

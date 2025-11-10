@@ -128,6 +128,9 @@
     $router->get('/api/prueba', function(){
         include_once(DIR_API . "ca_pruebaApi.php");
     });
+    $router->get('/api/error', function(){
+        include_once(DIR_VIEWS . "v_errorApi.php");
+    });
     $router->get('/api/prueba/{id}', function($id){
         echo $id;
     });
@@ -170,5 +173,6 @@
         include_once(DIR_VIEWS . "v_error.php");
         include_once(DIR_PUBLIC . "html/end.html");
     }
+    $_SESSION['porapi'] = false;
 
 ?>

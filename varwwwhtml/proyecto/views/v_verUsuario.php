@@ -78,13 +78,16 @@
             <input type="hidden" name="uuid" value="<?=$uuid?>">
             <input type="hidden" name="correoOriginal" value="<?=$correo?>">
            <input type="submit" value="Editar usuario">
-        </form>
+        </form><br>
         <p><b>Cambia tu foto:</b></p>
         <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
             Nueva foto: <input type="file" required name="foto" accept=".jpg,.jpeg,.png,.gif"><br>
+            Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
+            Otra vez: <input type="password" name="contrasegna2" required><br>
             <input type="hidden" name="esParaPerfil" value="s">
             <input type="hidden" name="btnSubir" value="Subir">
             <input type="hidden" name="uuid" value="<?=$uuid?>">
+            <input type="hidden" name="correo" value="<?=$correo?>">
             <input type="hidden" name="redirigir" value="s">
             <input type="submit" value="Editar foto">
         </form>

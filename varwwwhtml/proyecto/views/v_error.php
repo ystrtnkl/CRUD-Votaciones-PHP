@@ -1,3 +1,9 @@
+<?php
+    if ($_SESSION['porapi'] === true) {
+        header('Location: /api/error', true, 303);
+        $_SESSION['porapi'] = false;
+    }
+?>
 <title>Error 404</title>
 </head>
 <body>

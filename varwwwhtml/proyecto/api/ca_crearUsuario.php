@@ -17,8 +17,11 @@
     $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
     $contrasegna2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
     $esApi = isset($_POST['esApi']);
+    if ($esApi) {
+        $_SESSION['porapi'] = true;
+    }
 
-    //header('Content-Type: application/json; charset=utf-8');
+    header('Content-Type: application/json; charset=utf-8');
     try {
         try {
             /*if (password_verify($contrasegna2, $contrasegna)) {

@@ -16,7 +16,9 @@
     $contrasegna = isset($_POST['contrasegna']) ? /*password_hash(*/$_POST['contrasegna']/*, PASSWORD_BCRYPT)*/ : null;
     
     $esApi = isset($_POST['esApi']);
-    
+    if ($esApi) {
+        $_SESSION['porapi'] = true;
+    }
     
     try {
         Validaciones::vCorreo($correo);

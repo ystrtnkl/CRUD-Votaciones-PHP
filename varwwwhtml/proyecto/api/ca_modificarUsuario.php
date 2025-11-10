@@ -22,6 +22,10 @@
     $contrasegnaOriginal2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
     $esApi = isset($_POST['esApi']);
 
+    if ($esApi) {
+        $_SESSION['porapi'] = true;
+    }
+
     $nuevoNombre = $nuevoNombre === "" || $nuevoNombre === null ? "" : $nuevoNombre;
     $nuevoCorreo = $nuevoCorreo === "" || $nuevoCorreo === null ? "" : $nuevoCorreo;
     if ($nuevaContrasegna === "" || $nuevaContrasegna === null || $nuevaContrasegna2 === "" || $nuevaContrasegna2 === null) {

@@ -16,6 +16,9 @@
     $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
     $contrasegna2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
     $esApi = isset($_POST['esApi']);
+    if ($esApi) {
+        $_SESSION['porapi'] = true;
+    }
 
     try {
         try {

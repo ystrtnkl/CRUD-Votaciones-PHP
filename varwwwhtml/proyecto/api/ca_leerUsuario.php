@@ -12,6 +12,10 @@
 
     $uuid = isset($_GET['uuid']) ? $_GET['uuid'] : null;
 
+    if (isset($_GET['esApi'])) {
+        $_SESSION['porapi'] = true;
+    }
+
     header('Content-Type: application/json; charset=utf-8');
     try {
         $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $uuid);

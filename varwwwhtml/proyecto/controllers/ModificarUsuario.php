@@ -41,7 +41,24 @@
         }
         
         public static function modificarFoto(PDO $conexion, $uuid, $contrasegna, $correo, $fotoNueva) {
-            
-            return true;
+            try {
+                $usuarioOriginal = LeerUsuario::iniciarSesion($conexion, $correo, $contrasegna);
+                if ($_SESSION['esAdmin'] !== 's' && !password_verify($contrasegna, $usuarioOriginal->getContrasegna())) {
+                    throw new Exception("No estas autorizado");
+                }
+
+                $fotoNueva = $fotoNueva === "" || $fotoNueva === null ? $usuarioOriginal->getUrlFoto() : $fotoNueva;
+
+                $preparada = $conexion->prepare(UtilidadesDB::$actualizarUsuarioFotoPorUuid);
+                $preparada->bindValue('uuid',$uuid);
+                $preparada->bindValue('urlFoto',$fotoNueva);
+                $preparada->execute();
+                if ($preparada->execute()) {
+                    return true;
+                }
+            } catch (Exception $e) {
+                return false;
+            }
+            return false;
         }
     }

@@ -52,7 +52,8 @@
                 $this->correo = $correo;
                 $this->fechaCreado = $fechaCreado;
                 $this->esAdmin = $esAdmin;
-                $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
+                //$this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
+                $this->contrasegna = $contrasegna;
                 $this->urlFoto = $urlFoto;
             } catch (ValidationException $e) {
                 //echo "Error en los datos: " . $e;
@@ -108,7 +109,8 @@
         public function setContrasegna($contrasegna) {
             try {
                 Validaciones::vContrasegna($contrasegna);
-                $this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
+                //$this->contrasegna = password_hash($contrasegna, PASSWORD_BCRYPT);
+                $this->contrasegna = $contrasegna;
                 return $this;
             } catch (ValidationException $e) {
                 //echo "Error en los datos: " . $e;

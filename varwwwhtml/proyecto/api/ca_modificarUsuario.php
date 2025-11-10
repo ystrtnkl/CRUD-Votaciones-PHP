@@ -3,6 +3,7 @@
     use Controllers\ModificarUsuario;
     use Controllers\Functions\Validaciones;
     use Respect\Validation\Exceptions\ValidationException;
+    use Controllers\UtilidadesDB;
 
     //MODIFICAR un usuario mediante su uuid cambiando su posible nombre, correo, contrasegna
     //Metodo POST y todos los campos validados
@@ -11,50 +12,48 @@
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
 
-    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-    $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $nuevaContrasegna = isset($_POST['nuevaContrasegna']) ? password_hash($_POST['nuevaContrasegna'], PASSWORD_BCRYPT) : null;
-    //$nuevaContrasegna2 = isset($_POST['nuevaContrasegna2']) ? password_hash($_POST['nuevaContrasegna2'], PASSWORD_BCRYPT) : null;
+    $nuevoNombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
+    $nuevoCorreo = isset($_POST['correo']) ? $_POST['correo'] : null;
+    $nuevaContrasegna = isset($_POST['nuevaContrasegna']) ? $_POST['nuevaContrasegna'] : null;
+    $nuevaContrasegna2 = isset($_POST['nuevaContrasegna2']) ? $_POST['nuevaContrasegna2'] : null;
     $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;
-    $nombre = $nombre === "" || $nombre === null ? false : $nombre;
-    $correo = $correo === "" || $correo === null ? false : $correo;
-    $nuevaContrasegna = $nuevaContrasegna === "" || $nuevaContrasegna === null ? false : $nuevaContrasegna;
-    //$nuevaContrasegna2 = $nuevaContrasegna2 === "" || $nuevaContrasegna2 === null ? false : $nuevaContrasegna2;
+    $correoOriginal = isset($_POST['correoOriginal']) ? $_POST['correoOriginal'] : null;
+    $contrasegnaOriginal = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
+    $contrasegnaOriginal2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
     $esApi = isset($_POST['esApi']);
-    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
-    //$contrasegna2 = isset($_POST['contrasegna2']) ? password_hash($_POST['contrasegna2'], PASSWORD_BCRYPT) : null;
+
+    $nuevoNombre = $nuevoNombre === "" || $nuevoNombre === null ? "" : $nuevoNombre;
+    $nuevoCorreo = $nuevoCorreo === "" || $nuevoCorreo === null ? "" : $nuevoCorreo;
+    if ($nuevaContrasegna === "" || $nuevaContrasegna === null || $nuevaContrasegna2 === "" || $nuevaContrasegna2 === null) {
+        $nuevaContrasegna = $contrasegnaOriginal;
+        $nuevaContrasegna2 = $contrasegnaOriginal2;
+    }
 
     header('Content-Type: application/json; charset=utf-8');
     try {
-        /*if ($contrasegna2 !== $contrasegna) {
-            throw new Exception("Contrasegnas no coinciden");
+        if ($nuevaContrasegna !== $nuevaContrasegna2 || $contrasegnaOriginal !== $contrasegnaOriginal2) {
+            $mensaje = "Las dos contrasegnas tienen que ser iguales";
+            header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
+            exit;
         }
-        if ($nuevaContrasegna2 !== $nuevaContrasegna) {
-            throw new Exception("Contrasegnas nuevas no coinciden");
-        }*/
-        #$usuario = new Usuario($nombre, $correo, $contrasegna);
         try {
-            Validaciones::vContrasegna($contrasegna);
-            if ($nuevaContrasegna !== "") Validaciones::vContrasegna($nuevaContrasegna);
-            if ($correo !== "") Validaciones::vCorreo($correo);
-            if ($nombre !== "") Validaciones::vNombreUsuario($nombre);
+            Validaciones::vContrasegna($nuevaContrasegna);
+            Validaciones::vContrasegna($contrasegnaOriginal);
+            Validaciones::vCorreo($nuevoCorreo);
+            Validaciones::vCorreo($correoOriginal);
+            Validaciones::vNombreUsuario($nuevoNombre);
             Validaciones::vUuid($uuid);
         } catch (\Exception $e) {
             $mensaje = "Uno de los campos es invalido";
             header('Location: /error?mensaje=Alguno_de_los_campos_es_invalido', true, 303);
             exit;
         }
-        if ($_POST['contrasegna'] !== $_POST['contrasegna2']) {
-            $mensaje = "Las contrasegnas no coinciden";
-            header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
+        $datosNuevos = new Usuario($nuevoNombre, $nuevoCorreo, $nuevaContrasegna);
+        if (!ModificarUsuario::modificar(UtilidadesDB::getConexion(), $uuid, $contrasegnaOriginal, $correoOriginal, $datosNuevos)) {
+            $mensaje = "Ha habido un error con los datos o no tienes autorizacion para editar el usuario";
+            header('Location: /error?mensaje=Error_de_datos_o_autorizacion', true, 303);
             exit;
         }
-        if ($_POST['nuevaContrasegna'] !== $_POST['nuevaContrasegna2']) {
-            $mensaje = "Las contrasegnas no coinciden";
-            header('Location: /error?mensaje=Las_nuevas_contrasegnas_no_son_iguales', true, 303);
-            exit;
-        }
-        $usuario = ModificarUsuario::modificarDatos($uuid, $nombre, $correo, $contrasegna, false);
         include_once(DIR_FUNCTIONS . "c_asignarUsuarioSesion.php");
         if ($esApi) {
             $response = (object)[

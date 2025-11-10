@@ -40,7 +40,7 @@
     ?>
     <?php } ?>
 
-    <img src="<?=$urlFoto ?? 'http://localhost:8081/public/media/nofoto.png'?>" alt="Foto de perfil" class="foto-perfil">
+    <img src="<?=$urlFoto ?? 'http://localhost:8081/public/media/nofoto.png'?>" alt="Sin foto de perfil" class="foto-perfil">
     <h2>Nombre</h2>
     <p><?=$nombre?></p>
     <h2>Correo</h2>
@@ -55,37 +55,40 @@
     </p>
     <h2>Fecha de creacion</h2>
     <p><?=date('d/m/y', (int)$fechaCreacion) ?? "Desconocido"?></p>
-    <?php if ($uuid === $_GET['uuid']) { ?>
-    <h2>Eliminar</h2>
-    <form action="/api/borrarUsuario" method="POST">
-        <input type="hidden" name="uuid" value="<?=$uuid?>">
-        Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
-        Otra vez: <input type="password" name="contrasegna2" required><br>
-        <input type="submit" value="ELIMINAR">
-    </form>
-    <h2>Editar datos</h2>
-    <p>Déjalos en blanco para no editarlos</p>
-    <form action="/api/modificarUsuario" method="POST">
-        Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
-        Otra vez: <input type="password" name="contrasegna2" required><br>
-        Nuevo nombre: <input type="text" name="nombre" placeholder="<?=$_SESSION['auto-nombre'] ?? ''?>"><br>
-        Nuevo correo: <input type="email" name="correo" placeholder="<?=$_SESSION['auto-correo'] ?? ''?>"><br>
-        Nueva contrasegna: <input type="password" name="nuevaContrasegna"><br>
-        Nueva contrasegna otra vez: <input type="password" name="nuevaContrasegna2"><br>
-        <input type="hidden" name="uuid" value="<?=$uuid?>">
-        <input type="submit" value="Editar usuario">
-    </form>
-    <p><b>Cambia tu foto:</b></p>
-    <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
-        Nueva foto: <input type="file" required name="foto" accept=".jpg,.jpeg,.png,.gif"><br>
-        <input type="hidden" name="esParaPerfil" value="s">
-        <input type="hidden" name="btnSubir" value="Subir">
-        <input type="hidden" name="uuid" value="<?=$uuid?>">
-        <input type="hidden" name="redirigir" value="s">
-        <input type="submit" value="Editar foto">
-    </form>
-    <h2>Encuestas del usuario</h2>
+
+    <?php if ($_SESSION['uuid'] === $_GET['uuid']) { ?>
+        <h2>Eliminar</h2>
+        <form action="/api/borrarUsuario" method="POST">
+            <input type="hidden" name="uuid" value="<?=$uuid?>">
+            Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
+            Otra vez: <input type="password" name="contrasegna2" required><br>
+            <input type="hidden" name="correo" value="<?=$correo?>">
+            <input type="submit" value="ELIMINAR">
+        </form>
+        <h2>Editar datos</h2>
+        <p>Déjalos en blanco para no editarlos</p>
+        <form action="/api/modificarUsuario" method="POST">
+            Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
+            Otra vez: <input type="password" name="contrasegna2" required><br>
+            Nuevo nombre: <input type="text" name="nombre" placeholder="<?=$_SESSION['auto-nombre'] ?? ''?>"><br>
+            Nuevo correo: <input type="email" name="correo" placeholder="<?=$_SESSION['auto-correo'] ?? ''?>"><br>
+            Nueva contrasegna: <input type="password" name="nuevaContrasegna"><br>
+            Nueva contrasegna otra vez: <input type="password" name="nuevaContrasegna2"><br>
+            <input type="hidden" name="uuid" value="<?=$uuid?>">
+            <input type="hidden" name="correoOriginal" value="<?=$correo?>">
+           <input type="submit" value="Editar usuario">
+        </form>
+        <p><b>Cambia tu foto:</b></p>
+        <form action="/api/guardarFotoPerfil" method="POST" enctype='multipart/form-data'>
+            Nueva foto: <input type="file" required name="foto" accept=".jpg,.jpeg,.png,.gif"><br>
+            <input type="hidden" name="esParaPerfil" value="s">
+            <input type="hidden" name="btnSubir" value="Subir">
+            <input type="hidden" name="uuid" value="<?=$uuid?>">
+            <input type="hidden" name="redirigir" value="s">
+            <input type="submit" value="Editar foto">
+        </form>
     <?php } ?>
+    <h2>Encuestas del usuario</h2>
     <p>a</p>
     
 </main>

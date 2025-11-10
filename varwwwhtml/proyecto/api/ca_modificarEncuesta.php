@@ -3,6 +3,6 @@
     echo $nombre;
     header("Content-Type: text/plain");
 
-
+    //BORRAR ESTO, NO SE DEBERIA MODIFICAR UNA ENCUESTA
 
 ?>

@@ -13,7 +13,7 @@
             return true;
         }
 
-        public static function borrar(PDO $conexion, $uuid, $contrasegna): bool {
+        public static function borrar(PDO $conexion, $uuid, $contrasegna, $correo): bool {
             //borrar la encuesta y sus respuestas asociadas
             return true;
         }

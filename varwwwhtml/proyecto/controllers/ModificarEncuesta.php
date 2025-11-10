@@ -13,9 +13,12 @@
             return true;
         }
 
-        public static function modificar(PDO $conexion, $id, $encuestaNueva): bool {
+        public static function modificar(PDO $conexion, $uuid, $contrasegna, $correo, $objetoNuevo): bool {
             //modifica datos basicos de la encuesta
             return true;
         }
+
+
+        //CLASE A ELIMINAR
 
     }

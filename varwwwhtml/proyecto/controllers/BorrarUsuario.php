@@ -14,10 +14,10 @@
             return true;
         }
 
-        public static function borrar(PDO $conexion, $uuid, $contrasegna): bool {
+        public static function borrar(PDO $conexion, $uuid, $contrasegna, $correo): bool {
             try {
-                $usuario = LeerUsuario::leer($conexion, $uuid);
-                if ($_SESSION['esAdmin'] !== 's' || !password_verify($contrasegna, $usuario->getContrasegna())) {
+                $usuario = LeerUsuario::iniciarSesion($conexion, $correo, $contrasegna);
+                if ($_SESSION['esAdmin'] !== 's' && !password_verify($contrasegna, $usuario->getContrasegna())) {
                     throw new Exception("No estas autorizado");
                 }
                 $preparada = $conexion->prepare(UtilidadesDB::$borrarUsuarioPorUuid);

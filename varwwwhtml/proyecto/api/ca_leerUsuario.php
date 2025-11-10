@@ -18,6 +18,7 @@
         echo json_encode($usuario->jsonSerialize(), JSON_UNESCAPED_UNICODE);
     } catch (\Exception $e) {
         $mensaje = "El usuario no existe";
+        $_SESSION['error-mensaje'] = $mensaje;
         header('Location: /error?mensaje=Usuario_no_existe', true, 303);
         exit;
     }

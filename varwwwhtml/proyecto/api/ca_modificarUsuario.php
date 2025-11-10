@@ -33,24 +33,32 @@
     try {
         if ($nuevaContrasegna !== $nuevaContrasegna2 || $contrasegnaOriginal !== $contrasegnaOriginal2) {
             $mensaje = "Las dos contrasegnas tienen que ser iguales";
+            $_SESSION['error-mensaje'] = $mensaje;
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
             exit;
         }
         try {
-            Validaciones::vContrasegna($nuevaContrasegna);
+            $nuevaContrasegna ?? Validaciones::vContrasegna($nuevaContrasegna);
             Validaciones::vContrasegna($contrasegnaOriginal);
-            Validaciones::vCorreo($nuevoCorreo);
+            $nuevoCorreo ?? Validaciones::vCorreo($nuevoCorreo);
             Validaciones::vCorreo($correoOriginal);
-            Validaciones::vNombreUsuario($nuevoNombre);
+            $nuevoNombre ?? Validaciones::vNombreUsuario($nuevoNombre);
             Validaciones::vUuid($uuid);
         } catch (\Exception $e) {
             $mensaje = "Uno de los campos es invalido";
+            $_SESSION['error-mensaje'] = $mensaje;
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=Alguno_de_los_campos_es_invalido', true, 303);
             exit;
         }
-        $datosNuevos = new Usuario($nuevoNombre, $nuevoCorreo, $nuevaContrasegna);
-        if (!ModificarUsuario::modificar(UtilidadesDB::getConexion(), $uuid, $contrasegnaOriginal, $correoOriginal, $datosNuevos)) {
+        $nuevaContrasegna = password_hash($nuevaContrasegna, PASSWORD_BCRYPT);
+        $usuarioDatos = array("nombre" => $nuevoNombre, "correo" => $nuevoCorreo, "contrasegna" => $nuevaContrasegna);
+        $usuario = ModificarUsuario::modificar(UtilidadesDB::getConexion(), $uuid, $contrasegnaOriginal, $correoOriginal, $usuarioDatos);
+        if ($usuario === null) {
             $mensaje = "Ha habido un error con los datos o no tienes autorizacion para editar el usuario";
+            $_SESSION['error-mensaje'] = $mensaje;
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=Error_de_datos_o_autorizacion', true, 303);
             exit;
         }

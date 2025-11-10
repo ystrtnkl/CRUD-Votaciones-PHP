@@ -21,22 +21,23 @@
                     throw new Exception("No estas autorizado");
                 }
 
-                $nuevoNombre = $objetoNuevo->getNombre() === "" || $nuevoNombre === null ? "" : $nuevoNombre;
+                $nuevoNombre = $objetoNuevo["nombre"] === "" || $objetoNuevo["nombre"] === null ? $usuarioOriginal->getNombre() : $objetoNuevo["nombre"];
+                $nuevoCorreo = $objetoNuevo["correo"] === "" || $objetoNuevo["correo"] === null ? $usuarioOriginal->getCorreo() : $objetoNuevo["correo"];
+                $nuevaContrasegna = $objetoNuevo["contrasegna"] === "" || $objetoNuevo["contrasegna"] === null ? $usuarioOriginal->getContrasegna() : $objetoNuevo["contrasegna"];
 
                 $preparada = $conexion->prepare(UtilidadesDB::$actualizarUsuarioPorUuid);
                 $preparada->bindValue('uuid',$uuid);
-                $preparada->bindValue('nombre',$nombre);
-                $preparada->bindValue('correo',$uuid);
-                $preparada->bindValue('contrasegna',$uuid);
+                $preparada->bindValue('nombre',$nuevoNombre);
+                $preparada->bindValue('correo',$nuevoCorreo);
+                $preparada->bindValue('contrasegna',$nuevaContrasegna);
                 $preparada->execute();
                 if ($preparada->execute()) {
-                    return true;
+                    return new Usuario($nuevoNombre, $nuevoCorreo, $nuevaContrasegna, $uuid, $usuarioOriginal->getFechaCreado(), $usuarioOriginal->getEsAdmin(), $usuarioOriginal->getUrlFoto());
                 }
             } catch (Exception $e) {
-                return false;
+                return null;
             }
-            //borrar el usuario y sus encuestas y respuestas asociadas
-            return false;
+            return null;
         }
         
         public static function modificarFoto(PDO $conexion, $uuid, $contrasegna, $correo, $fotoNueva) {

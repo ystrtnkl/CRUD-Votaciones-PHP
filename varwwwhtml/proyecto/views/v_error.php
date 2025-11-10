@@ -7,15 +7,18 @@
     if (isset($error)) {
         if ($error === 404) {
             $mensaje = "Ruta no encontrada";
+            //$_SESSION['error-mensaje'] = $mensaje;
         }
         if ($error === 405) {
             $mensaje = "Metodo HTTP no permitido";
+            //$_SESSION['error-mensaje'] = $mensaje;
         }
     } else {
         //$mensaje = "Error desconocido";
         if (!isset($mensaje)) {
             $mensaje = $_GET['mensaje'] ?? "";
             $mensaje = str_replace("_", " ", $mensaje) . '.';
+            //$_SESSION['error-mensaje'] = $mensaje;
         }
     }
 ?>
@@ -26,6 +29,7 @@
     <button onclick="window.history.back()">Ir atras</button>
     <?php if (!isset($e) || $e === null) { ?>
     <p>Mas informacion: <?=$descripcion??''?></p>
+    <p><?=$_SESSION['error-mensaje'] ?? $mensaje?></p>
     <div class="alert alert-danger cajaError" role="alert">
         <?php
             if (isset($e)) {
@@ -33,7 +37,9 @@
             }
         ?>
     </div>
-    <?php } ?>
+    <?php } 
+    $_SESSION['error-mensaje'] = "";
+    ?>
     <br><br><br>
 </main>
 <?php include(DIR_VIEWS . "template/vt_footer.php") ?>

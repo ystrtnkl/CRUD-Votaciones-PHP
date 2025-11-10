@@ -118,9 +118,6 @@
     $router->get('/api/leerEncuesta', function(){
         include_once(DIR_API . "ca_leerEncuesta.php");
     });
-    $router->post('/api/modificarEncuesta', function(){
-        include_once(DIR_API . "ca_modificarEncuesta.php");
-    });
     $router->post('/api/crearRespuesta', function(){
         include_once(DIR_API . "ca_crearRespuesta.php");
     });

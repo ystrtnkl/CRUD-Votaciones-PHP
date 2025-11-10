@@ -26,6 +26,7 @@
         $usuario = LeerUsuario::leer(UtilidadesDB::getConexion(), $_GET['uuid']);
         if ($usuario === null) {
             $mensaje = "No se ha encontrado el usuario especificado";
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=Usuario_no_encontrado', true, 303);
             exit;
         } else {

@@ -29,11 +29,13 @@
             Validaciones::vNombreUsuario($nombre);
         } catch (\Exception $e) {
             $mensaje = "Uno de los datos introducidos es invalido";
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=El_nombre,_correo_o_contrasegna_son_invalidos', true, 303);
             exit;
         }
         if (!password_verify($contrasegna2, $contrasegna)) {
             $mensaje = "Las dos contrasegnas tienen que ser iguales";
+            $_SESSION['error-mensaje'] = $mensaje;
             header('Location: /error?mensaje=Ambas_contrasegnas_tienen_que_ser_iguales', true, 303);
             exit;
         }
@@ -57,6 +59,7 @@
         }
     } catch (\Exception $e) {
         $mensaje = "Ha habido un error en los campos";
+        $_SESSION['error-mensaje'] = $mensaje;
         header('Location: /error?mensaje=Error_en_los_datos', true, 303);
     }
 

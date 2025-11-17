@@ -8,7 +8,7 @@
     //Metodo POST y todos los campos validados
     //esApi para recibir una respuesta en JSON, si no devuelve a /
 
-    $metodoRequerido = "POST";
+    $metodoRequerido = ["POST", "DELETE"];
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
     
     $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;

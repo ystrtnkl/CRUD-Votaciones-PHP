@@ -1,4 +1,4 @@
-
+<?php include_once(DIR_FUNCTIONS . "c_esAdmin.php"); ?>
 <div class="container"> 
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         
@@ -27,9 +27,11 @@
             <li class="nav-item">
                 <a href="/pedirContrasegna" class="nav-link" id="cabecera-pedirContrasegna">Generador</a>
             </li>
+            <?php if (esAdmin()) { ?>
             <li class="nav-item">
                 <a href="/admin" class="nav-link" id="cabecera-admin">Administracion</a>
             </li>
+            <?php } ?>
         </ul> 
         <p>soy: <?=$_SESSION['uuid'] ?? "nadie"?></p> 
     </header> 

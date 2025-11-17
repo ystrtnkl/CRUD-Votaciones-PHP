@@ -4,8 +4,9 @@ use Controllers\LeerUsuario;
 use Controllers\UtilidadesDB;
 //Recibe un uuid y una foto, y la guarda, y asigna a ese usuario esa foto
 
-$metodoRequerido = "POST";
+$metodoRequerido = ["POST", "PUT", "PATCH"];
 include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+comprobarMetodo($metodoRequerido);
 
 
 try {

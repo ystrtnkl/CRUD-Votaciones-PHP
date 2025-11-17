@@ -8,6 +8,7 @@
     use \PDO;
     use Controllers\UtilidadesDB;
     use Controllers\LeerUsuario;
+    include_once(DIR_FUNCTIONS . "c_esAdmin.php");
     class ModificarUsuario implements Modificar {
         public static function autorizarAccion(PDO $conexion, $usuario, $contrasegna): bool {
             //el usuario existe y esa es su contrasegna, tiene que ser admin o duegno del objeto
@@ -17,7 +18,7 @@
         public static function modificar(PDO $conexion, $uuid, $contrasegna, $correo, $objetoNuevo) {
             try {
                 $usuarioOriginal = LeerUsuario::iniciarSesion($conexion, $correo, $contrasegna);
-                if ($_SESSION['esAdmin'] !== 's' && !password_verify($contrasegna, $usuarioOriginal->getContrasegna())) {
+                if (!esAdmin() && !password_verify($contrasegna, $usuarioOriginal->getContrasegna())) {
                     throw new Exception("No estas autorizado");
                 }
 
@@ -43,7 +44,7 @@
         public static function modificarFoto(PDO $conexion, $uuid, $contrasegna, $correo, $fotoNueva) {
             try {
                 $usuarioOriginal = LeerUsuario::iniciarSesion($conexion, $correo, $contrasegna);
-                if ($_SESSION['esAdmin'] !== 's' && !password_verify($contrasegna, $usuarioOriginal->getContrasegna())) {
+                if (!esAdmin() && !password_verify($contrasegna, $usuarioOriginal->getContrasegna())) {
                     throw new Exception("No estas autorizado");
                 }
 

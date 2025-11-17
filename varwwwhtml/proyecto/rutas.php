@@ -4,8 +4,15 @@
     use Phroute\Phroute\Exception\HttpRouteNotFoundException;
     use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
     use Controllers\LeerUsuario;
+    include_once(DIR_FUNCTIONS . "c_esAdmin.php");
 
     $router = new RouteCollector(); #Crear el enrutador
+
+    //Filtro para los endpoints del admin
+    $router->filter('esAdmin', function(){
+        return esAdmin();
+    });
+
 
     #Creando rutas, que tienen que devolver un texto (el contenido a mostrar)
 
@@ -82,10 +89,14 @@
         include_once(DIR_PUBLIC . "html/end.html");
     });
     $router->get('/admin', function(){
-        include_once(DIR_PUBLIC . "html/head.html");  
-        include_once(DIR_VIEWS . "admin/v_admin.php");
-        include_once(DIR_PUBLIC . "html/end.html");
-    });
+        if (esAdmin()) {
+            include_once(DIR_PUBLIC . "html/head.html");  
+            include_once(DIR_VIEWS . "admin/v_admin.php");
+            include_once(DIR_PUBLIC . "html/end.html");
+        } else {
+            header('Location: /error?mensaje=No_tienes_permitida_esta_accion', true, 303);
+        }
+    }, ['after' => 'esAdmin']);
     
 
 
@@ -100,19 +111,19 @@
     $router->post('/api/crearUsuario', function(){
         include_once(DIR_API . "ca_crearUsuario.php");
     });
-    $router->post('/api/borrarUsuario', function(){
+    $router->any('/api/borrarUsuario', function(){ //POST o DELETE
         include_once(DIR_API . "ca_borrarUsuario.php");
     });
     $router->get('/api/leerUsuario', function(){
         include_once(DIR_API . "ca_leerUsuario.php");
     });
-    $router->post('/api/modificarUsuario', function(){
+    $router->any('/api/modificarUsuario', function(){ //POST o PUT o PATCH
         include_once(DIR_API . "ca_modificarUsuario.php");
     });
     $router->post('/api/crearEncuesta', function(){
         include_once(DIR_API . "ca_crearEncuesta.php");
     });
-    $router->post('/api/borrarEncuesta', function(){
+    $router->any('/api/borrarEncuesta', function(){ //POST o DELETE
         include_once(DIR_API . "ca_borrarEncuesta.php");
     });
     $router->get('/api/leerEncuesta', function(){

@@ -7,6 +7,7 @@
 
     $metodoRequerido = "GET";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+    comprobarMetodo($metodoRequerido);
 
     //$uuid = isset($_GET['uuid']) ? $_GET['uuid'] : null;
 

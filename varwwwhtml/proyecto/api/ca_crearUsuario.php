@@ -11,6 +11,7 @@
 
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+    comprobarMetodo($metodoRequerido);
 
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;

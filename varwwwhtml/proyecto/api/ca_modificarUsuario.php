@@ -9,8 +9,9 @@
     //Metodo POST y todos los campos validados
     //esApi para recibir una respuesta en JSON, si no devuelve a /verUsuario?uuid=x
 
-    $metodoRequerido = "POST";
+    $metodoRequerido = ["POST", "PUT", "PATCH"];
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+    comprobarMetodo($metodoRequerido);
 
     $nuevoNombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
     $nuevoCorreo = isset($_POST['correo']) ? $_POST['correo'] : null;

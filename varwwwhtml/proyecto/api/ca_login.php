@@ -11,6 +11,7 @@
 
     $metodoRequerido = "POST";
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
+    comprobarMetodo($metodoRequerido);
 
     $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
     $contrasegna = isset($_POST['contrasegna']) ? /*password_hash(*/$_POST['contrasegna']/*, PASSWORD_BCRYPT)*/ : null;

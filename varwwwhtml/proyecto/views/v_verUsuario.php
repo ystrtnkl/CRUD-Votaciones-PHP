@@ -6,7 +6,10 @@
 <title>Ver usuario</title>
 </head>
 <body>
-<?php require(DIR_VIEWS . "template/vt_cabecera.php") ?>
+<?php 
+require(DIR_VIEWS . "template/vt_cabecera.php");
+include_once(DIR_FUNCTIONS . "c_esAdmin.php");
+?>
 <main>
     <h2>Ver usuario</h2>
     
@@ -49,8 +52,8 @@
     <h2>Eres Admin</h2>
     <p>
     <?php 
-    echo $esAdmin === 's' ? "Sí" : "No";
-    if ($esAdmin === 's' && $_SESSION['uuid'] === $_GET['uuid'] && isset($_SESSION['uuid'])) { ?>
+    echo esAdmin() ? "Sí" : "No";
+    if (esAdmin() && $_SESSION['uuid'] === $_GET['uuid'] && isset($_SESSION['uuid'])) { ?>
         <br><a href="/admin">Panel de administracion</a>
     <?php } ?>
     </p>

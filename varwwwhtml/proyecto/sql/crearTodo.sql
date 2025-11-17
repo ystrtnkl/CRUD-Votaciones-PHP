@@ -10,7 +10,7 @@ CREATE TABLE USUARIO (
     fechaCreado VARCHAR(12) DEFAULT CURRENT_TIMESTAMP, -- registrada aqui o en php
     esAdmin CHAR(1), -- inmodificable
     urlFoto VARCHAR(255), 
-    CONSTRAINT chk_esAdmin CHECK (esAdmin IN ('s','n'))
+    CONSTRAINT chk_esAdmin CHECK (esAdmin IN ('s','n')) 
 ) ENGINE=InnoDB;
 
 CREATE TABLE ENCUESTA (
@@ -20,7 +20,7 @@ CREATE TABLE ENCUESTA (
     uuid_USUARIO CHAR(36) NOT NULL, -- uuid otro usuario
     uuidsPermisos VARCHAR(4095), -- uuids usuarios permitidos separados por comas
     tipoPermisos CHAR(1), -- b: blacklist, n: no, w: whitelist
-    CONSTRAINT fk_ENCUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid),
+    CONSTRAINT fk_ENCUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid) ON DELETE CASCADE,
     CONSTRAINT chk_tipoPermisos CHECK (tipoPermisos IN ('b','n','w')),
     foto VARCHAR(127),
     fechaCreado VARCHAR(12) DEFAULT CURRENT_TIMESTAMP -- registrada aqui o en php
@@ -31,8 +31,8 @@ CREATE TABLE RESPUESTA (
     contenido VARCHAR(4095) NOT NULL,
     uuid_USUARIO CHAR(36) NOT NULL, -- uuid otro usuario
     id_ENCUESTA CHAR(36) NOT NULL, -- uuid otra encuesta
-    CONSTRAINT fk_RESPUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid),
-    CONSTRAINT fk_RESPUESTA_id_ENCUESTA FOREIGN KEY (id_ENCUESTA) REFERENCES ENCUESTA(id),
+    CONSTRAINT fk_RESPUESTA_uuid_USUARIO FOREIGN KEY (uuid_USUARIO) REFERENCES USUARIO(uuid) ON DELETE CASCADE,
+    CONSTRAINT fk_RESPUESTA_id_ENCUESTA FOREIGN KEY (id_ENCUESTA) REFERENCES ENCUESTA(id) ON DELETE CASCADE,
     fechaCreado VARCHAR(12) DEFAULT CURRENT_TIMESTAMP -- registrada aqui o en php
 ) ENGINE=InnoDB;
 

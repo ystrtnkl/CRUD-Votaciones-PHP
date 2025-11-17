@@ -13,15 +13,15 @@
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
     comprobarMetodo($metodoRequerido);
 
-    $nuevoNombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-    $nuevoCorreo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $nuevaContrasegna = isset($_POST['nuevaContrasegna']) ? $_POST['nuevaContrasegna'] : null;
-    $nuevaContrasegna2 = isset($_POST['nuevaContrasegna2']) ? $_POST['nuevaContrasegna2'] : null;
-    $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;
-    $correoOriginal = isset($_POST['correoOriginal']) ? $_POST['correoOriginal'] : null;
-    $contrasegnaOriginal = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
-    $contrasegnaOriginal2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
-    $esApi = isset($_POST['esApi']);
+    $nuevoNombre = isset(PETICION['nombre']) ? PETICION['nombre'] : null;
+    $nuevoCorreo = isset(PETICION['correo']) ? PETICION['correo'] : null;
+    $nuevaContrasegna = isset(PETICION['nuevaContrasegna']) ? PETICION['nuevaContrasegna'] : null;
+    $nuevaContrasegna2 = isset(PETICION['nuevaContrasegna2']) ? PETICION['nuevaContrasegna2'] : null;
+    $uuid = isset(PETICION['uuid']) ? PETICION['uuid'] : null;
+    $correoOriginal = isset(PETICION['correoOriginal']) ? PETICION['correoOriginal'] : null;
+    $contrasegnaOriginal = isset(PETICION['contrasegna']) ? PETICION['contrasegna'] : null;
+    $contrasegnaOriginal2 = isset(PETICION['contrasegna2']) ? PETICION['contrasegna2'] : null;
+    $esApi = isset(PETICION['esApi']);
 
     if ($esApi) {
         $_SESSION['porapi'] = true;

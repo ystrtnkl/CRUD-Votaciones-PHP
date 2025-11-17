@@ -1,5 +1,5 @@
 <?php
-    $nombre = isset($_POST['nombre']) ? $_GET['nombre'] : "";
+    $nombre = isset(PETICION['nombre']) ?? "";
     echo $nombre;
     header("Content-Type: text/plain");
 

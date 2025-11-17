@@ -13,11 +13,11 @@
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
     comprobarMetodo($metodoRequerido);
 
-    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : null;
-    $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? password_hash($_POST['contrasegna'], PASSWORD_BCRYPT) : null;
-    $contrasegna2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
-    $esApi = isset($_POST['esApi']);
+    $nombre = isset(PETICION['nombre']) ? PETICION['nombre'] : null;
+    $correo = isset(PETICION['correo']) ? PETICION['correo'] : null;
+    $contrasegna = isset(PETICION['contrasegna']) ? password_hash(PETICION['contrasegna'], PASSWORD_BCRYPT) : null;
+    $contrasegna2 = isset(PETICION['contrasegna2']) ? PETICION['contrasegna2'] : null;
+    $esApi = isset(PETICION['esApi']);
     if ($esApi) {
         $_SESSION['porapi'] = true;
     }

@@ -11,11 +11,11 @@
     $metodoRequerido = ["POST", "DELETE"];
     include_once(DIR_FUNCTIONS . "c_requerirMetodo.php");
     
-    $uuid = isset($_POST['uuid']) ? $_POST['uuid'] : null;
-    $correo = isset($_POST['correo']) ? $_POST['correo'] : null;
-    $contrasegna = isset($_POST['contrasegna']) ? $_POST['contrasegna'] : null;
-    $contrasegna2 = isset($_POST['contrasegna2']) ? $_POST['contrasegna2'] : null;
-    $esApi = isset($_POST['esApi']);
+    $uuid = isset(PETICION['uuid']) ? PETICION['uuid'] : null;
+    $correo = isset(PETICION['correo']) ? PETICION['correo'] : null;
+    $contrasegna = isset(PETICION['contrasegna']) ? PETICION['contrasegna'] : null;
+    $contrasegna2 = isset(PETICION['contrasegna2']) ? PETICION['contrasegna2'] : null;
+    $esApi = isset(PETICION['esApi']);
     if ($esApi) {
         $_SESSION['porapi'] = true;
     }

@@ -45,11 +45,10 @@ include_once(DIR_FUNCTIONS . "c_esAdmin.php");
     <?php } ?>
 
     <img src="<?=$urlFoto ?? 'http://localhost:8081/public/media/nofoto.png'?>" alt="Sin foto de perfil" class="foto-perfil">
-    <h2>Nombre</h2>
-    <p><?=$nombre?></p>
-    <h2>Correo</h2>
-    <p><?=$correo?></p>
-    <h2>Eres Admin</h2>
+    <h3>Nombre: <strong><?=$nombre?></strong></h3>
+    <p></p>
+    <h3>Correo: <strong><?=$correo?></strong></h3>
+    <h3>Eres Admin?</h3>
     <p>
     <?php 
     echo esAdmin() ? "Sí" : "No";
@@ -57,18 +56,9 @@ include_once(DIR_FUNCTIONS . "c_esAdmin.php");
         <br><a href="/admin">Panel de administracion</a>
     <?php } ?>
     </p>
-    <h2>Fecha de creacion</h2>
-    <p><?=date('d/m/y', (int)$fechaCreacion) ?? "Desconocido"?></p>
+    <h3>Fecha de creacion: <strong><?=date('d/m/y', (int)$fechaCreacion) ?? "Desconocido"?></strong></h3>
 
     <?php if ($_SESSION['uuid'] === $_GET['uuid']) { ?>
-        <h2>Eliminar</h2>
-        <form action="/api/borrarUsuario" method="POST">
-            <input type="hidden" name="uuid" value="<?=$uuid?>">
-            Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
-            Otra vez: <input type="password" name="contrasegna2" required><br>
-            <input type="hidden" name="correo" value="<?=$correo?>">
-            <input type="submit" value="ELIMINAR">
-        </form>
         <h2>Editar datos</h2>
         <p>Déjalos en blanco para no editarlos</p>
         <form action="/api/modificarUsuario" method="POST">
@@ -93,6 +83,14 @@ include_once(DIR_FUNCTIONS . "c_esAdmin.php");
             <input type="hidden" name="correo" value="<?=$correo?>">
             <input type="hidden" name="redirigir" value="s">
             <input type="submit" value="Editar foto">
+        </form>
+        <h2>Eliminar</h2>
+        <form action="/api/borrarUsuario" method="POST">
+            <input type="hidden" name="uuid" value="<?=$uuid?>">
+            Por razones de seguridad, introduce tu contrasegna: <input type="password" name="contrasegna" required><br>
+            Otra vez: <input type="password" name="contrasegna2" required><br>
+            <input type="hidden" name="correo" value="<?=$correo?>">
+            <input type="submit" value="ELIMINAR">
         </form>
     <?php } ?>
     <h2>Encuestas del usuario</h2>

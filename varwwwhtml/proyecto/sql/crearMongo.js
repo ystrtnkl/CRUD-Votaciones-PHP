@@ -2,13 +2,17 @@ db.createCollection("usuarios", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["uuid", "nombre", "contrasegna", "fechaCreado", "esAdmin"],
+      required: ["uuid", "nombre", "correo", "contrasegna"],
       properties: {
         uuid: {
           bsonType: "string",
-          description: "UUID del usuario"
+          description: "UUID primary key"
         },
         nombre: {
+          bsonType: "string",
+          maxLength: 63
+        },
+        correo: {
           bsonType: "string",
           maxLength: 63
         },
@@ -17,23 +21,31 @@ db.createCollection("usuarios", {
           maxLength: 128
         },
         fechaCreado: {
-          bsonType: "date"
+          bsonType: "string"
         },
         esAdmin: {
-          enum: ["s", "n"],
-          description: "Solo puede ser 's' o 'n'"
+          bsonType: "string",
+          enum: ["s", "n"]
+        },
+        urlFoto: {
+          bsonType: "string"
         }
       }
     }
   }
 });
+db.usuarios.createIndex({ correo: 1 }, { unique: true });
+db.usuarios.createIndex({ uuid: 1 }, { unique: true });
 
 db.createCollection("encuestas", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["nombre", "contenido", "uuid_USUARIO", "tipoPermisos"],
+      required: ["id", "nombre", "contenido", "uuid_USUARIO", "tipoPermisos"],
       properties: {
+        id: {
+          bsonType: "string"
+        },
         nombre: {
           bsonType: "string",
           maxLength: 127
@@ -43,42 +55,55 @@ db.createCollection("encuestas", {
           maxLength: 1023
         },
         uuid_USUARIO: {
-          bsonType: "string",
-          description: "Referencia al usuario creador (uuid)"
+          bsonType: "string"
         },
         uuidsPermisos: {
-          bsonType: "array",
-          items: { bsonType: "string" },
-          description: "Lista de UUIDs con permisos"
+          bsonType: "string"
         },
         tipoPermisos: {
-          enum: ["b", "n", "w"],
-          description: "Solo puede ser b, n o w"
+          bsonType: "string",
+          enum: ["b", "n", "w"]
+        },
+        foto: {
+          bsonType: "string"
+        },
+        fechaCreado: {
+          bsonType: "string"
         }
       }
     }
   }
 });
+db.encuestas.createIndex({ id: 1 }, { unique: true });
+db.encuestas.createIndex({ uuid_USUARIO: 1 });
 
 db.createCollection("respuestas", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["contenido", "uuid_USUARIO", "id_ENCUESTA"],
+      required: ["id", "contenido", "uuid_USUARIO", "id_ENCUESTA"],
       properties: {
+        id: {
+          bsonType: "string"
+        },
         contenido: {
           bsonType: "string",
           maxLength: 4095
         },
         uuid_USUARIO: {
-          bsonType: "string",
-          description: "Referencia al usuario que respondió"
+          bsonType: "string"
         },
         id_ENCUESTA: {
-          bsonType: "objectId",
-          description: "Referencia a la encuesta respondida"
+          bsonType: "string"
+        },
+        fechaCreado: {
+          bsonType: "string"
         }
       }
     }
   }
 });
+db.respuestas.createIndex({ id: 1 }, { unique: true });
+db.respuestas.createIndex({ uuid_USUARIO: 1 });
+db.respuestas.createIndex({ id_ENCUESTA: 1 });
+
